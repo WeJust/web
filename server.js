@@ -76,105 +76,14 @@ app.get('/session', function (req, res) {
    res.send(req.session);
 });
 
-app.get('/chat', function (req, res) {
-   res.sendFile('client/chat.html', { root: __dirname });
-});
 
 app.get('/', function (req, res) {
    res.sendFile('client/index.html', { root: __dirname });
 });
 
-app.get('/play', function (req, res) {
-   res.sendFile('client/game.html', { root: __dirname });
-});
-
-
-app.get('/game', function (req, res) {
-
-    if (req.session.user){
-     res.redirect('/play?u='+CryptoJS.AES.encrypt(req.session.user, "tomiproject"));
-    }else{
-      res.sendFile('client/login.html', { root: __dirname });
-    }
-
-});
-
-app.get('/logout', function (req, res) {
-  req.session.user = null;
-   res.sendFile('client/login.html', { root: __dirname });
-});
-
-app.get('/login', function (req, res) {
-   res.sendFile('client/login.html', { root: __dirname });
-});
-
-app.post('/login',function (req, res) {
-
-var username = req.body.username;
-var pass = req.body.password;
-    db.ref('/users/'+username).once('value').then(function(snapshot) {
-
-      var userpass = snapshot.val().password;
-      console.log(session);
-      if (pass == userpass){
-        req.session.user = username;
-        //socket.handshake.session.userdata = username;
-        res.redirect('/game');
-      }else{
-            res.send("login error");
-      }
-    });
-});
-
-app.get('/signup', function (req, res) {
-   res.sendFile('client/signup.html', { root: __dirname });
-});
-
-app.post('/signup', function (req, res) {
-
-var username = req.body.username;
-
-  if (req.body.password != req.body.password2){
-    res.send("password error");
-  }else{
-    db.ref('/users/' + username).once('value').then(function(snapshot) {
-    if (snapshot.val()){
-      res.send("username already taken");
-    }else{
-      /* create account */
-      db_add("users/"+username,{password : req.body.password, game_position : {x:0,y:0,z:0}});
-
-      res.redirect('/login');
-    }
-    });
-  }
-});
-
-app.post('/signup', function (req, res) {
-
-var username = req.body.username;
-
-  if (req.body.password != req.body.password2){
-    res.send("password error");
-  }else{
-    db.ref('/users/' + username).once('value').then(function(snapshot) {
-    if (snapshot.val()){
-      res.send("username already taken");
-    }else{
-      /* create account */
-      db_add("users/"+username,{password : req.body.password, game_position : {x:0,y:0,z:0}});
-
-      res.redirect('/login');
-    }
-    });
-  }
-});
 
 
 io.on('connection', function (socket) {
-    messages.forEach(function (data) {
-      socket.emit('message', data);
-    });
 
     sockets.push(socket);
 
@@ -185,25 +94,9 @@ io.on('connection', function (socket) {
            db_update(json);
       });
 
-      //detect new player connected on FireBase
-      // db.ref('users_connected/').on('child_added', function(snapshot) {
-      //   socket.emit("new player",{id : snapshot.key, info  : snapshot.val()});
-      // });
-
-      //detect player moving on FireBase
-      db.ref('users_connected/').on('child_changed', function(snapshot) {
-        socket.emit("update player position",{id : snapshot.key, info  : snapshot.val()});
-      });
-
-      //detect player disconnected on FireBase
-       db.ref('users_connected/').on('child_removed', function(snapshot) {
-         socket.emit("remove player",{id : snapshot.key});
-       });
-
 
       socket.on('disconnect', function () {
-        sockets.splice(sockets.indexOf(socket), 1);
-        db.ref('users_connected/'+socket.id).remove();
+
       });
 
 
