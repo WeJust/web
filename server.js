@@ -50,7 +50,7 @@ var server = http.createServer(app);
 var io = socketio.listen(server);
 
 //app.use(express.bodyParser());
-app.use(express.static(path.resolve(__dirname, 'client')));
+app.use(express.static(path.resolve(dirname, 'client')));
 // Middleware session
 app.use(session(
 {
@@ -78,7 +78,7 @@ app.get('/session', function (req, res) {
 
 
 app.get('/', function (req, res) {
-   res.sendFile('client/index.html', { root: __dirname });
+   res.sendFile('client/index.html', { root: dirname });
 });
 
 
