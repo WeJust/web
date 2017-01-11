@@ -1,10 +1,10 @@
 {
-  "name": "tomigame",
+  "name": "wejust",
   "version": "0.0.0",
-  "description": "A game",
+  "description": "awesome app",
   "main": "server.js",
   "repository": "",
-  "author": "Tomi",
+  "author": "WejustEISTI",
   "dependencies": {
     "body-parser": "^1.15.2",
     "crypto-js": "^3.1.9-1",

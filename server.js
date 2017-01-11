@@ -24,7 +24,7 @@ var firebase = require("firebase");
   };
   firebase.initializeApp(config);
 var db = firebase.database();
-  
+
 /** Firebase functions **********************************************/
 
 /** to add new object in db */
@@ -81,7 +81,7 @@ app.get('/chat', function (req, res) {
 });
 
 app.get('/', function (req, res) {
-   res.sendFile('client/login.html', { root: __dirname });
+   res.sendFile('client/index.html', { root: __dirname });
 });
 
 app.get('/play', function (req, res) {
@@ -90,24 +90,14 @@ app.get('/play', function (req, res) {
 
 
 app.get('/game', function (req, res) {
-  
+
     if (req.session.user){
      res.redirect('/play?u='+CryptoJS.AES.encrypt(req.session.user, "tomiproject"));
     }else{
       res.sendFile('client/login.html', { root: __dirname });
     }
-   
-});
 
-// app.get('/game', function (req, res) {
-    
-//     if (req.session.user){
-//       res.sendFile('client/game.html?u='+req.session.user, { root: __dirname });
-//     }else{
-//       res.sendFile('client/login.html', { root: __dirname });
-//     }
-   
-// });
+});
 
 app.get('/logout', function (req, res) {
   req.session.user = null;
@@ -123,7 +113,7 @@ app.post('/login',function (req, res) {
 var username = req.body.username;
 var pass = req.body.password;
     db.ref('/users/'+username).once('value').then(function(snapshot) {
-      
+
       var userpass = snapshot.val().password;
       console.log(session);
       if (pass == userpass){
@@ -153,7 +143,7 @@ var username = req.body.username;
     }else{
       /* create account */
       db_add("users/"+username,{password : req.body.password, game_position : {x:0,y:0,z:0}});
-      
+
       res.redirect('/login');
     }
     });
@@ -173,7 +163,7 @@ var username = req.body.username;
     }else{
       /* create account */
       db_add("users/"+username,{password : req.body.password, game_position : {x:0,y:0,z:0}});
-      
+
       res.redirect('/login');
     }
     });
@@ -187,36 +177,36 @@ io.on('connection', function (socket) {
     });
 
     sockets.push(socket);
-    
+
       // update player position on FireBase
       socket.on('update position', function (data) {
            var json = {};
            json["users_connected/"+socket.id+"/"] = {user : data.user, game_position : data.game_position};
            db_update(json);
       });
-      
+
       //detect new player connected on FireBase
       // db.ref('users_connected/').on('child_added', function(snapshot) {
       //   socket.emit("new player",{id : snapshot.key, info  : snapshot.val()});
-      // }); 
-      
+      // });
+
       //detect player moving on FireBase
       db.ref('users_connected/').on('child_changed', function(snapshot) {
         socket.emit("update player position",{id : snapshot.key, info  : snapshot.val()});
       });
-      
+
       //detect player disconnected on FireBase
        db.ref('users_connected/').on('child_removed', function(snapshot) {
          socket.emit("remove player",{id : snapshot.key});
-       });       
-      
-      
+       });
+
+
       socket.on('disconnect', function () {
         sockets.splice(sockets.indexOf(socket), 1);
         db.ref('users_connected/'+socket.id).remove();
       });
- 
-    
+
+
   });
 
 
