@@ -1,26 +1,17 @@
 {
-  "name": "node-js-getting-started",
-  "version": "0.2.5",
-  "description": "A sample Node.js app using Express 4",
-  "engines": {
-    "node": "5.9.1"
-  },
-  "main": "index.js",
-  "scripts": {
-    "start": "node index.js"
-  },
+  "name": "tomigame",
+  "version": "0.0.0",
+  "description": "A game",
+  "main": "server.js",
+  "repository": "",
+  "author": "Tomi",
   "dependencies": {
-    "ejs": "2.4.1",
-    "express": "4.13.3"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/heroku/node-js-getting-started"
-  },
-  "keywords": [
-    "node",
-    "heroku",
-    "express"
-  ],
-  "license": "MIT"
+    "body-parser": "^1.15.2",
+    "crypto-js": "^3.1.9-1",
+    "express": "^4.14.0",
+    "express-session": "^1.14.2",
+    "firebase": "^3.6.3",
+    "materialize-css": "^0.97.8",
+    "socket.io": "^1.7.2"
+  }
 }
