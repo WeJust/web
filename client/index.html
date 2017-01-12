@@ -1,7 +1,7 @@
 <!doctype html>
-<html lang="en" ng-app>
+<html lang="en" ng-app="app">
   <head>
-    <title>Stay High</title>
+    <title>We just</title>
       <!--Import Google Icon Font-->
       <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
       <!--Import materialize.css-->
@@ -26,39 +26,25 @@
     </div>
   </nav>
 
-  <div class="container">
+<ng-view></ng-view>
 
 
-    <div class="row">
-    <form class="col s12" action="/login" method="post" >
+ <script src="https://www.gstatic.com/firebasejs/3.6.5/firebase.js"></script>
+ <script>
+   // Initialize Firebase
+   var config = {
+     apiKey: "AIzaSyCQ5_5T5oXbiH3CvyprML-fgYJds42Qbfk",
+     authDomain: "wejust-def99.firebaseapp.com",
+     databaseURL: "https://wejust-def99.firebaseio.com",
+     storageBucket: "wejust-def99.appspot.com",
+     messagingSenderId: "990839940817"
+   };
+   firebase.initializeApp(config);
+ </script>
 
-    <div class="row">
+ <script type="text/javascript" src="js/controllers/HomeController.js"></script>
 
-        <div class="col s12 center-align">
-        Title
-      </div>
-       </div>
-      <div class="row">
-        <div class="input-field col s12">
-          <input name="username" type="text" class="validate">
-          <label>Username</label>
-        </div>
-        </div>
-      <div class="row">
-        <div class="input-field col s12">
-          <input name="password" type="password" class="validate">
-          <label>Password</label>
-        </div>
-      </div>
-
-      <input type="submit" class="waves-effect waves-light btn green" value="Login" />
-    </form>
-  </div>
-
- </div>
-
-
-    <script src="https://www.gstatic.com/firebasejs/3.6.3/firebase.js"></script>
+ <script type="text/javascript" src="js/routes.js"></script>
     <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
     <script type="text/javascript" src="js/sources/materialize.min.js"></script>
 
