@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" ng-app="app">
+<html ng-app="app">
   <head>
     <title>We just</title>
       <!--Import Google Icon Font-->
@@ -27,7 +27,6 @@
 
 <ng-view></ng-view>
 
-
  <script src="https://www.gstatic.com/firebasejs/3.6.5/firebase.js"></script>
  <script>
    // Initialize Firebase
@@ -40,7 +39,9 @@
    };
    firebase.initializeApp(config);
  </script>
-    <script src="js/sources/angular.min.js"></script>
+ <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.min.js"></script>
+ <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular-route.js"></script>
+
     <script type="text/javascript" src="js/controllers/HomeController.js"></script>
 
     <script type="text/javascript" src="js/routes.js"></script>
