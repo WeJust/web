@@ -66,8 +66,7 @@ app.get('/', function (req, res) {
 });
 
 app.get('/register',function (req, res) {
-    res.sendFile('client/pages/
-                 signup.html', {root:__dirname});
+    res.sendFile('client/pages/signup.html', {root:__dirname});
 });
 
 
