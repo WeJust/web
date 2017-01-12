@@ -62,7 +62,7 @@ app.get('/session', function (req, res) {
 
 
 app.get('/', function (req, res) {
-    res.sendFile('client/pages/index.html', { root: __dirname });
+    res.sendFile('client/index.html', { root: __dirname });
 });
 
 app.get('/register',function (req, res) {
