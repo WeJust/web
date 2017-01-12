@@ -50,7 +50,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
     extended: true
 }));
-
+app.use(app.router);
 
 var messages = [];
 var sockets = [];
@@ -60,12 +60,16 @@ app.get('/session', function (req, res) {
     res.send(req.session);
 });
 
-
+app.use(function(req, res) {
+  // Use res.sendfile, as it streams instead of reading the file into memory.
+  res.sendfile(__dirname + 'client/index.html');
+});
+/*
 app.get('/', function (req, res) {
     res.sendFile('client/index.html', { root: __dirname });
 });
 
-/*
+
 app.get('/register',function (req, res) {
     res.sendFile('client/pages/signup.html', {root:__dirname});
 });*/
