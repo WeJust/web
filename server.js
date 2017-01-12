@@ -55,8 +55,6 @@ app.use(bodyParser.urlencoded({
 var messages = [];
 var sockets = [];
 
-
-
 /*
 app.use(app.router);
 app.use(function(req, res) {
@@ -73,8 +71,6 @@ app.get('/session', function (req, res) {
 });
 
 */
-
-
 
 io.on('connection', function (socket) {
 
