@@ -1,6 +1,4 @@
-var app = angular.module('app', ['ngRoute']);
-
-app.config(['$routeProvider', function ($routeProvider) {
+angular.module('app', ['ngRoute']).config(['$routeProvider', function ($routeProvider) {
     $routeProvider
       .when('/', {
         templateUrl: '/pages/login.html',
