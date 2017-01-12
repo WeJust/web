@@ -2,5 +2,8 @@ angular.module('app', ['ngRoute']).config(['$routeProvider', function ($routePro
     $routeProvider
       .when('/', {
         templateUrl: '/pages/login.html'
-      });
+      })
+      .when('/test', {
+          templateUrl: '/pages/signup.html'
+        });
 }]);
