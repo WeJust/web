@@ -56,14 +56,23 @@ var messages = [];
 var sockets = [];
 
 
-app.get('/session', function (req, res) {
-    res.send(req.session);
+
+
+app.use(app.router);
+app.use(function(req, res) {
+  // Use res.sendfile, as it streams instead of reading the file into memory.
+  res.sendfile(__dirname + '/public/index.html');
 });
 
 /*
 app.get('/', function (req, res) {
     res.sendFile('client/index.html', { root: __dirname });
-});*/
+});
+app.get('/session', function (req, res) {
+    res.send(req.session);
+});
+
+*/
 
 
 
