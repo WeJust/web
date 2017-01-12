@@ -3,9 +3,5 @@ angular.module('app', ['ngRoute']).config(['$routeProvider', function ($routePro
       .when('/', {
         templateUrl: '/pages/login.html',
         controller: 'HomeController'
-      })
-      .when('/register', {
-        templateUrl: '/pages/signup.html',
-        controller: 'HomeController'
       });
 }]);
