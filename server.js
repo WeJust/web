@@ -97,7 +97,7 @@ var username = req.body.username;
       /* create account */
       db_add("users/"+username,{password : req.body.password});
 
-      res.redirect('/login');
+      res.redirect('/');
     }
     });
   }
