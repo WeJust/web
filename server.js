@@ -61,7 +61,7 @@ var sockets = [];
 app.use(app.router);
 app.use(function(req, res) {
   // Use res.sendfile, as it streams instead of reading the file into memory.
-  res.sendfile(__dirname + '/public/index.html');
+  res.sendfile('index.html');
 });
 
 /*
