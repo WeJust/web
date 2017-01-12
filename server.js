@@ -11,7 +11,18 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var session = require('express-session');
 var CryptoJS = require("crypto-js");
+var firebase = require("firebase");
 
+// Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyCQ5_5T5oXbiH3CvyprML-fgYJds42Qbfk",
+    authDomain: "wejust-def99.firebaseapp.com",
+    databaseURL: "https://wejust-def99.firebaseio.com",
+    storageBucket: "wejust-def99.appspot.com",
+    messagingSenderId: "990839940817"
+  };
+  firebase.initializeApp(config);
+var db = firebase.database();
 
 /** to add new object in db */
 function db_add(path, object) {
@@ -71,6 +82,47 @@ app.get('/session', function (req, res) {
 });
 
 */
+
+app.post('/signup', function (req, res) {
+
+var username = req.body.username;
+
+  if (req.body.password != req.body.password2){
+    res.send("password error");
+  }else{
+    db.ref('/users/' + username).once('value').then(function(snapshot) {
+    if (snapshot.val()){
+      res.send("username already taken");
+    }else{
+      /* create account */
+      db_add("users/"+username,{password : req.body.password});
+
+      res.redirect('/login');
+    }
+    });
+  }
+});
+
+
+
+app.post('/login',function (req, res) {
+
+var username = req.body.username;
+var pass = req.body.password;
+    db.ref('/users/'+username).once('value').then(function(snapshot) {
+
+      var userpass = snapshot.val().password;
+      console.log(session);
+      if (pass == userpass){
+        req.session.user = username;
+        //socket.handshake.session.userdata = username;
+        res.redirect('/log');
+      }else{
+            res.send("login error");
+      }
+    });
+});
+
 
 io.on('connection', function (socket) {
 
