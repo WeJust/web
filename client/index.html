@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en" ng-app="app">
+  <head>
+    <title>We just</title>
+      <!--Import Google Icon Font-->
+      <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+      <!--Import materialize.css-->
+      <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
+      <!--Let browser know website is optimized for mobile-->
+      <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+  </head>
+  <body>
+
+
+  <nav>
+    <div class="nav-wrapper black">
+      <a href="/" class="brand-logo">WeJust</a>
+      <ul class="right hide-on-med-and-down">
+        <li><a href="#">A link</a></li>
+        <li><a class="waves-effect waves-light btn orange" href = "/">button</a></li>
+        <li><a class="waves-effect waves-light btn cyan darken-3" href="/">button</a></li>
+        <li><a class="waves-effect waves-light btn-large green" href = "/">button</a></li>
+
+      </ul>
+    </div>
+  </nav>
+
+<ng-view></ng-view>
+
+
+ <script src="https://www.gstatic.com/firebasejs/3.6.5/firebase.js"></script>
+ <script>
+   // Initialize Firebase
+   var config = {
+     apiKey: "AIzaSyCQ5_5T5oXbiH3CvyprML-fgYJds42Qbfk",
+     authDomain: "wejust-def99.firebaseapp.com",
+     databaseURL: "https://wejust-def99.firebaseio.com",
+     storageBucket: "wejust-def99.appspot.com",
+     messagingSenderId: "990839940817"
+   };
+   firebase.initializeApp(config);
+ </script>
+
+ <script type="text/javascript" src="js/controllers/HomeController.js"></script>
+
+ <script type="text/javascript" src="js/routes.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="js/sources/materialize.min.js"></script>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="js/sources/angular.min.js"></script>
+  </body>
+</html>
