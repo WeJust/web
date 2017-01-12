@@ -12,28 +12,14 @@ var bodyParser = require('body-parser');
 var session = require('express-session');
 var CryptoJS = require("crypto-js");
 
-var firebase = require("firebase");
-
-// Initialize Firebase
-  var config = {
-    apiKey: "AIzaSyAWFIlsHUE_FCPZjJZxDgQ2aeUrMlJV2vY",
-    authDomain: "cloud9project-a4d2b.firebaseapp.com",
-    databaseURL: "https://cloud9project-a4d2b.firebaseio.com",
-    storageBucket: "cloud9project-a4d2b.appspot.com",
-    messagingSenderId: "390910647243"
-  };
-  firebase.initializeApp(config);
-var db = firebase.database();
-
-/** Firebase functions **********************************************/
 
 /** to add new object in db */
 function db_add(path, object) {
-  db.ref(path).set(object);
+    db.ref(path).set(object);
 }
 
 function db_update(json){
-  db.ref().update(json);
+    db.ref().update(json);
 }
 
 
@@ -50,22 +36,20 @@ var server = http.createServer(app);
 var io = socketio.listen(server);
 
 //app.use(express.bodyParser());
-app.use(express.static(path.resolve(dirname, 'client')));
+app.use(express.static(path.resolve(__dirname, 'client')));
 // Middleware session
 app.use(session(
-{
-  secret: 'cloud9projectRandomString0001',
-  saveUninitialized: false,
-  resave: false
-}
+    {
+        secret: 'cloud9projectRandomString0001',
+        saveUninitialized: false,
+        resave: false
+    }
 ));
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
-  extended: true
+    extended: true
 }));
-
-
 
 
 var messages = [];
@@ -73,12 +57,12 @@ var sockets = [];
 
 
 app.get('/session', function (req, res) {
-   res.send(req.session);
+    res.send(req.session);
 });
 
 
 app.get('/', function (req, res) {
-   res.sendFile('client/index.html', { root: dirname });
+    res.sendFile('client/index.html', { root: __dirname });
 });
 
 
@@ -87,29 +71,29 @@ io.on('connection', function (socket) {
 
     sockets.push(socket);
 
-      // update player position on FireBase
-      socket.on('update position', function (data) {
-           var json = {};
-           json["users_connected/"+socket.id+"/"] = {user : data.user, game_position : data.game_position};
-           db_update(json);
-      });
+    // update player position on FireBase
+    socket.on('update position', function (data) {
+        var json = {};
+        json["users_connected/"+socket.id+"/"] = {user : data.user, game_position : data.game_position};
+        db_update(json);
+    });
 
 
-      socket.on('disconnect', function () {
+    socket.on('disconnect', function () {
 
-      });
+    });
 
 
-  });
+});
 
 
 function broadcast(event, data) {
-  sockets.forEach(function (socket) {
-    socket.emit(event, data);
-  });
+    sockets.forEach(function (socket) {
+        socket.emit(event, data);
+    });
 }
 
 server.listen(process.env.PORT || 3000, process.env.IP || "0.0.0.0", function(){
-  var addr = server.address();
-  console.log("Chat server listening at", addr.address + ":" + addr.port);
+    var addr = server.address();
+    console.log("Chat server listening at", addr.address + ":" + addr.port);
 });
