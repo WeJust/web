@@ -85,6 +85,7 @@ app.get('/session', function (req, res) {
 
 app.post('/signup', function (req, res) {
 
+console.log("teeeeeeeeeeeeeeeeeeeeeeeeee");
 var username = req.body.username;
 
   if (req.body.password != req.body.password2){
