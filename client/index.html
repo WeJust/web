@@ -1,43 +1,44 @@
 <!doctype html>
 <html ng-app="app">
-  <head>
+<head>
     <title>We just</title>
-      <!--Import Google Icon Font-->
-      <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-      <!--Import materialize.css-->
-      <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
-      <link type="text/css" rel="stylesheet" href="css/style.css">
-      <!--Let browser know website is optimized for mobile-->
-      <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <!--Import Google Icon Font-->
+    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
+    <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
+    <link type="text/css" rel="stylesheet" href="css/style.css">
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
-  </head>
-  <body>
+</head>
+<body>
 
-  <nav>
+<nav>
     <div class="nav-wrapper black">
-      <a href="/" class="brand-logo">We Just</a>
-      <ul class="right hide-on-med-and-down">
-        <li><a href="#">A link</a></li>
-        <li><a class="waves-effect waves-light btn orange" href = "/">button</a></li>
-        <li><a class="waves-effect waves-light btn cyan darken-3" href="/">button</a></li>
-        <li><a class="waves-effect waves-light btn-large green" href = "/">button</a></li>
+        <a href="/" class="brand-logo">We Just</a>
+        <ul class="right hide-on-med-and-down">
+            <li><a href="#">A link</a></li>
+            <li><a class="waves-effect waves-light btn orange" href = "/">button</a></li>
+            <li><a class="waves-effect waves-light btn cyan darken-3" href="/">button</a></li>
+            <li><a class="waves-effect waves-light btn-large green" href = "/">button</a></li>
 
-      </ul>
+        </ul>
     </div>
-  </nav>
+</nav>
 
 <ng-view></ng-view>
 
- <script src="https://www.gstatic.com/firebasejs/3.6.5/firebase.js"></script>
- <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.min.js"></script>
- <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular-route.js"></script>
+<script src="https://www.gstatic.com/firebasejs/3.6.5/firebase.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular-route.js"></script>
 
 <script type="text/javascript" src="js/routes.js"></script>
 <script type="text/javascript" src="js/controllers/HomeController.js"></script>
 
-    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-    <script type="text/javascript" src="js/sources/materialize.min.js"></script>
-    <script src="/socket.io/socket.io.js"></script>
+<script type="text/javascript" src="js/sources/materialize.min.js"></script>
+<script type="text/javascript" src="js/sources/functions.js"></script>
+<script src="/socket.io/socket.io.js"></script>
 
-  </body>
+</body>
 </html>

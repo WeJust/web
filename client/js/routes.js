@@ -9,7 +9,6 @@ angular.module('app', ['ngRoute']).config(['$routeProvider', function ($routePro
         .when('/test', {
             templateUrl: '/pages/signup.html',
             controller: 'HomeController'
-
         });
 
 }]);
