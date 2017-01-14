@@ -80,8 +80,11 @@ app.get('/', function (req, res) {
 app.get('/session', function (req, res) {
     res.send(req.session);
 });
-
 */
+
+app.get("/register", function (req, res) {
+    res.sendFile('pages/signup.html', {root:__dirnname});
+});
 
 app.post('/signup', function (req, res) {
 
