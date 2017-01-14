@@ -39,11 +39,14 @@
         </form>
 
         <script type="text/javascript">
+            $(document).ready(function () {
                 $("#passwordAlert").hide();
 
-                function checkPasswordMatch() {
+                $("#passwordField, #passwordConfirm").keyup(function(){
+
                     var password = $("#passwordField").val();
                     var passwordConfimr = $("#passwordConfirm").val();
+
                     if (password != passwordConfimr) {
                         $("#passwordAlert").show();
                         $("#registerFormSubmit").addClass("disabled");
@@ -52,10 +55,8 @@
                         $("#passwordAlert").hide();
                         $("#registerFormSubmit").removeClass("disabled")
                     }
-                }
-
-                $("#passwordField, #passwordConfirm").keyup(checkPasswordMatch());
-
+                });
+            });
         </script>
     </div>
 </div>
