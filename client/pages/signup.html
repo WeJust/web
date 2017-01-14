@@ -42,18 +42,28 @@
             $(document).ready(function () {
                 $("#passwordAlert").hide();
 
-                $("#passwordField, #passwordConfirm").keyup(function(){
+                $("#passwordField, #passwordConfirm").keyup(function() {
 
                     var password = $("#passwordField").val();
                     var passwordConfimr = $("#passwordConfirm").val();
 
-                    if (password != passwordConfimr) {
+                    if (password.length < 6) {
+                        $("#passwordAlert p").html("Password must be at least 6 character long");
                         $("#passwordAlert").show();
                         $("#registerFormSubmit").addClass("disabled");
-                    }
-                    else {
+
+                    } else {
+                        $("#registerFormSubmit").removeClass("disabled");
                         $("#passwordAlert").hide();
-                        $("#registerFormSubmit").removeClass("disabled")
+                        $("#passwordAlert p").html("Password and password confirmation are different !");
+                        if (password != passwordConfimr) {
+                            $("#passwordAlert").show();
+                            $("#registerFormSubmit").addClass("disabled");
+                        }
+                        else {
+                            $("#passwordAlert").hide();
+                            $("#registerFormSubmit").removeClass("disabled");
+                        }
                     }
                 });
             });
