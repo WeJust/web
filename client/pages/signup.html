@@ -41,8 +41,10 @@
         <script type="text/javascript">
                 $("#passwordAlert").hide();
 
-                $("#passwordField").change(function () {
-                    if ($("#passwordField").val()!=$("#passwordConfirm").val()) {
+                function checkPasswordMatch() {
+                    var password = $("#passwordField").val();
+                    var passwordConfimr = $("#passwordConfirm").val();
+                    if (password != passwordConfimr) {
                         $("#passwordAlert").show();
                         $("#registerFormSubmit").addClass("disabled");
                     }
@@ -50,7 +52,10 @@
                         $("#passwordAlert").hide();
                         $("#registerFormSubmit").removeClass("disabled")
                     }
-                });
+                }
+
+                $("#passwordField, #passwordConfirm").keyup(checkPasswordMatch());
+
         </script>
     </div>
 </div>
