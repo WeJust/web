@@ -1,3 +1,15 @@
-#registerBtn {
+.btn-grey {
     background: #9e9e9e;
+}
+
+.btn-grey:hover {
+    background: #BDC3C7;
+}
+
+.btn-green {
+    background: #4caf50;
+}
+
+.btn-green:hover {
+    background: #5fdc64;
 }
