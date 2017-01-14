@@ -26,15 +26,31 @@
                 </div>
             </div>
             <div class="row">
-                <div class="card red lighten-5">
-                    <div id="passwordAlert" class="card-content red-text">
-                        <p>Password and password confirmation are different !</p>
+                <div class="col s6">
+                    <div class="card red lighten-5">
+                        <div id="passwordAlert" class="card-content red-text">
+                            <p>Password and password confirmation are different !</p>
+                        </div>
                     </div>
                 </div>
             </div>
 
             <input id="registerFormSubmit" type="submit" class="waves-effect waves-light btn btn-green" value="Create account" />
         </form>
-    </div>
 
+        <script type="text/javascript">
+                $("#passwordAlert").hide();
+
+                $("#passwordField").change(function () {
+                    if ($("#passwordField").val()!=$("#passwordConfirm").val()) {
+                        $("#passwordAlert").show();
+                        $("#registerFormSubmit").addClass("disabled");
+                    }
+                    else {
+                        $("#passwordAlert").hide();
+                        $("#registerFormSubmit").removeClass("disabled")
+                    }
+                });
+        </script>
+    </div>
 </div>
