@@ -90,10 +90,7 @@ app.post('/signup', function (req, res) {
 
 console.log("teeeeeeeeeeeeeeeeeeeeeeeeee");
 var username = req.body.username;
-
-  if (req.body.password != req.body.password2){
-    res.send("password error");
-  }else{
+ 
     db.ref('/users/' + username).once('value').then(function(snapshot) {
     if (snapshot.val()){
       res.send("username already taken");
@@ -104,7 +101,6 @@ var username = req.body.username;
       res.redirect('/');
     }
     });
-  }
 });
 
 
