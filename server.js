@@ -14,14 +14,14 @@ var CryptoJS = require("crypto-js");
 var firebase = require("firebase");
 
 // Initialize Firebase
-  var config = {
+var config = {
     apiKey: "AIzaSyCQ5_5T5oXbiH3CvyprML-fgYJds42Qbfk",
     authDomain: "wejust-def99.firebaseapp.com",
     databaseURL: "https://wejust-def99.firebaseio.com",
     storageBucket: "wejust-def99.appspot.com",
     messagingSenderId: "990839940817"
-  };
-  firebase.initializeApp(config);
+};
+firebase.initializeApp(config);
 var db = firebase.database();
 
 /** to add new object in db */
@@ -67,20 +67,20 @@ var messages = [];
 var sockets = [];
 
 /*
-app.use(app.router);
-app.use(function(req, res) {
-  // Use res.sendfile, as it streams instead of reading the file into memory.
-  res.sendfile('index.html');
-});*/
+ app.use(app.router);
+ app.use(function(req, res) {
+ // Use res.sendfile, as it streams instead of reading the file into memory.
+ res.sendfile('index.html');
+ });*/
 
 /*
-app.get('/', function (req, res) {
-    res.sendFile('client/index.html', { root: __dirname });
-});
-app.get('/session', function (req, res) {
-    res.send(req.session);
-});
-*/
+ app.get('/', function (req, res) {
+ res.sendFile('client/index.html', { root: __dirname });
+ });
+ app.get('/session', function (req, res) {
+ res.send(req.session);
+ });
+ */
 
 app.get("/register", function (req, res) {
     res.sendFile('pages/signup.html', {root:__dirnname});
@@ -88,38 +88,42 @@ app.get("/register", function (req, res) {
 
 app.post('/signup', function (req, res) {
 
-console.log("teeeeeeeeeeeeeeeeeeeeeeeeee");
-var username = req.body.username;
- 
-    db.ref('/users/' + username).once('value').then(function(snapshot) {
-    if (snapshot.val()){
-      res.send("username already taken");
-    }else{
-      /* create account */
-      db_add("users/"+username,{password : req.body.password});
+    console.log("teeeeeeeeeeeeeeeeeeeeeeeeee");
+    var username = req.body.username;
+    var password = req.body.password;
+    var email = req.body.email;
 
-      res.redirect('/');
-    }
+    /* create account */
+    db_add("username/"+username,{instrument : "guitare"});
+
+    firebase.auth().createUserWithEmailAndPassword(email,password).catch(function (error) {
+
+        var errorCode = error.code;
+        var errorMessage = error.message;
+
+        console.log("Error Firebase ! " + errorCode + " : " + errorMessage);
     });
+
+    res.redirect('/#!/home');
 });
 
 
 
 app.post('/login',function (req, res) {
 
-var username = req.body.username;
-var pass = req.body.password;
+    var username = req.body.username;
+    var pass = req.body.password;
     db.ref('/users/'+username).once('value').then(function(snapshot) {
 
-      var userpass = snapshot.val().password;
-      console.log(session);
-      if (pass == userpass){
-        req.session.user = username;
-        //socket.handshake.session.userdata = username;
-        res.redirect('/log');
-      }else{
+        var userpass = snapshot.val().password;
+        console.log(session);
+        if (pass == userpass){
+            req.session.user = username;
+            //socket.handshake.session.userdata = username;
+            res.redirect('/log');
+        }else{
             res.send("login error");
-      }
+        }
     });
 });
 

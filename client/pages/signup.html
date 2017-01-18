@@ -3,23 +3,25 @@
     <div class="row">
         <div class="row">
             <div class="col s12 center-align">
-                <h2>Register {{data}}</h2>
+                <h2>Register</h2>
             </div>
         </div>
         <form id="register-form" class="col s12" action="/signup" method="post" >
             <div class="row">
                 <div class="input-field col s12">
-                    <input name="email" type="email" class="validate" ng-model="emailField" required/>
+                    <input name="email" type="email" class="validate" ng-model="emailField"
+                            required/>
                     <label>Email</label>
                 </div>
             </div>
             <div class="row">
                 <div class="input-field col s12">
-                    <input name="username" type="text" class="validate" required ng-model="usernameField"
-                           ng-blur="checkUsername()"/>
-                    <label>Email</label>
+                    <input name="username" type="text" class="validate" ng-model="usernameField"
+                           ng-change="checkUsername()" required />
+                    <label>Username</label>
                 </div>
-                <div id="usernameAlert" class="card-content red-text col s12" ng-show="usernameValid">
+                <div id="usernameAlert" class="card-content red-text col s12"
+                     ng-show="!usernameValid && usernameField!=null">
                     <p>Username already taken !</p>
                 </div>
             </div>
@@ -32,7 +34,7 @@
             </div>
             <div class="row">
                 <div class="input-field col s12">
-                    <input id="passwordConfirm" name="password2" type="password" class="validate"/>
+                    <input id="passwordConfirm" name="password2" type="password" class="validate" />
                     <label>Password confirmation</label>
                 </div>
             </div>
@@ -46,8 +48,8 @@
                 </div>
             </div>
 
-            <input id="registerFormSubmit" type="submit" class="waves-effect waves-light btn btn-green"
-                   value="Create account" ng-click="authenticate()" ng-disabled="!usernameValid"/>
+            <input id="registerFormSubmit" type="submit" class="waves-effect waves-light btn btn-green disabled"
+                   value="Create account" ng-disabled="!usernameValid"/>
         </form>
 
         <script type="text/javascript">
@@ -62,15 +64,12 @@
                     if (password.length < 6) {
                         $("#passwordAlert p").html("Password must be at least 6 character long");
                         $("#passwordAlert").show();
-                        $("#registerFormSubmit").addClass("disabled");
 
                     } else {
-                        $("#registerFormSubmit").removeClass("disabled");
                         $("#passwordAlert").hide();
                         $("#passwordAlert p").html("Password and password confirmation are different !");
                         if (password != passwordConfimr) {
                             $("#passwordAlert").show();
-                            $("#registerFormSubmit").addClass("disabled");
                         }
                         else {
                             $("#passwordAlert").hide();
