@@ -109,7 +109,7 @@ app.post('/signup', function (req, res) {
             firebaseuser.updateProfile({
                 displayName: username
             }).then(function () {
-                res.redirect('/#!/home');
+                res.redirect('/#!/login');
             }, function (error) {
                 var errorCode = error.code;
                 var errorMessage = error.message;
