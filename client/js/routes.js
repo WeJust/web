@@ -11,11 +11,14 @@ app.config(['$routeProvider', function ($routeProvider) {
         })
         .when('/home',{
             templateUrl: '/pages/home.html',
-            controller:'HomeController'
+            controller:'MainController'
+        })
+        .when('/error', {
+            templateUrl: '/pages/error.html',
+            controller: 'HomeController'
         })
         .when('/test', {
             templateUrl: '/pages/signup.html',
             controller: 'HomeController'
         });
-
 }]);

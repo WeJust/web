@@ -14,19 +14,20 @@
 
 </head>
 <body>
+<div class="navbar-fixed">
+    <nav>
+        <div class="nav-wrapper black">
+            <a href="/" class="brand-logo">We Just</a>
+            <ul class="right hide-on-med-and-down">
+                <li><a href="#">A link</a></li>
+                <li><a class="waves-effect waves-light btn orange" href = "/">button</a></li>
+                <li><a class="waves-effect waves-light btn cyan darken-3" href="/">button</a></li>
+                <li><a class="waves-effect waves-light btn-large green" href = "/">button</a></li>
 
-<nav>
-    <div class="nav-wrapper black">
-        <a href="/" class="brand-logo">We Just</a>
-        <ul class="right hide-on-med-and-down">
-            <li><a href="#">A link</a></li>
-            <li><a class="waves-effect waves-light btn orange" href = "/">button</a></li>
-            <li><a class="waves-effect waves-light btn cyan darken-3" href="/">button</a></li>
-            <li><a class="waves-effect waves-light btn-large green" href = "/">button</a></li>
-
-        </ul>
-    </div>
-</nav>
+            </ul>
+        </div>
+    </nav>
+</div>
 
 <ng-view></ng-view>
 
@@ -59,6 +60,8 @@
 
 <script type="text/javascript" src="js/routes.js"></script>
 <script type="text/javascript" src="js/controllers/HomeController.js"></script>
+<script type="text/javascript" src="js/controllers/MainController.js"></script>
+
 
 <script type="text/javascript" src="js/sources/materialize.min.js"></script>
 <script type="text/javascript" src="js/sources/functions.js"></script>

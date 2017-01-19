@@ -1,5 +1,6 @@
 app.controller('HomeController', function ($scope) {
 
+
     $scope.usernameValid = false;
 
     $scope.checkUsername=function () {

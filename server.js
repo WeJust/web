@@ -13,6 +13,13 @@ var session = require('express-session');
 var CryptoJS = require("crypto-js");
 var firebase = require("firebase");
 
+var user;
+var userEmail;
+var userName;
+var userPhotoURL;
+var emailVerified;
+var uid;
+
 // Initialize Firebase
 var config = {
     apiKey: "AIzaSyCQ5_5T5oXbiH3CvyprML-fgYJds42Qbfk",
@@ -104,27 +111,47 @@ app.post('/signup', function (req, res) {
         console.log("Error Firebase ! " + errorCode + " : " + errorMessage);
     });
 
-    res.redirect('/#!/home');
+    firebase.auth().currentUser.updateProfile({
+        displayName: username
+    }).then(function () {
+        res.redirect('/#!/home');
+    }, function (error) {
+        res.send("An error occured");
+    });
 });
 
-
+app.get('/getFirebaseUser', function (req, res) {
+    console.log("Checkpoint reach");
+   res.send(user);
+});
 
 app.post('/login',function (req, res) {
 
-    var username = req.body.username;
-    var pass = req.body.password;
-    db.ref('/users/'+username).once('value').then(function(snapshot) {
+    var email = req.body.email;
+    var password = req.body.password;
 
-        var userpass = snapshot.val().password;
-        console.log(session);
-        if (pass == userpass){
-            req.session.user = username;
-            //socket.handshake.session.userdata = username;
-            res.redirect('/log');
-        }else{
-            res.send("login error");
-        }
-    });
+
+
+    firebase.auth().signInWithEmailAndPassword(email,password)
+        .then(function (firebaseuser) {
+            user = firebaseuser;
+            uid = user.uid;
+            userEmail = user.email;
+            userName = user.displayName;
+            emailVerified = user.emailVerified;
+            userPhotoURL = user.photoURL;
+            console.log(uid +" " + userEmail+" " + userName+" " + userPhotoURL + " " + emailVerified);
+            res.redirect('/#!/home');
+        })
+        .catch(function (error) {
+            var errorCode = error.code;
+            var errorMessage = error.message;
+
+            console.log("Error Firebase ! " + errorCode + " : " + errorMessage);
+            res.redirect("/#!/error");
+        });
+
+
 });
 
 
