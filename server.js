@@ -95,7 +95,7 @@ app.get("/register", function (req, res) {
 
 app.post('/signup', function (req, res) {
 
-    console.log("teeeeeeeeeeeeeeeeeeeeeeeeee");
+    console.log("Signup page");
     var username = req.body.username;
     var password = req.body.password;
     var email = req.body.email;
@@ -132,7 +132,7 @@ app.post('/signup', function (req, res) {
 });
 
 app.get('/getFirebaseUser', function (req, res) {
-    console.log("Checkpoint reach");
+    console.log("User info send !");
     res.send(user);
 });
 
