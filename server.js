@@ -73,21 +73,6 @@ app.use(bodyParser.urlencoded({
 var messages = [];
 var sockets = [];
 
-/*
- app.use(app.router);
- app.use(function(req, res) {
- // Use res.sendfile, as it streams instead of reading the file into memory.
- res.sendfile('index.html');
- });*/
-
-/*
- app.get('/', function (req, res) {
- res.sendFile('client/index.html', { root: __dirname });
- });
- app.get('/session', function (req, res) {
- res.send(req.session);
- });
- */
 
 app.get("/register", function (req, res) {
     res.sendFile('pages/signup.html', {root:__dirnname});
@@ -101,7 +86,10 @@ app.post('/signup', function (req, res) {
     var email = req.body.email;
 
     /* create account */
-    db_add("username/"+username,{instrument : "guitare"});
+    db_add("usernames/"+username,{
+        email : email,
+        instrument : "guitare"
+    });
 
     firebase.auth().createUserWithEmailAndPassword(email,password)
         .then(function (firebaseuser) {
@@ -162,6 +150,16 @@ app.post('/login',function (req, res) {
             res.redirect("/#!/error");
         });
 
+
+});
+
+app.post('/create_room',function (req, res) {
+
+    var json = JSON.parse(JSON.stringify(req.body));
+    delete json.name;
+
+    db.ref("rooms/"+req.body.name).set(json);
+    res.redirect("/#!/home");
 
 });
 
