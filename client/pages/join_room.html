@@ -1,0 +1,87 @@
+<div class="container">
+
+    <div class="row">
+        <div class="row">
+
+            <div class="col s12 center-align">
+                <h1>Join room {{search}}</h1>
+            </div>
+            <div class="progress" ng-hide="AllRooms">
+                <div class="indeterminate"></div>
+            </div>
+        </div>
+        <div class="row">
+            <p>Search a specific room</p>
+            <div class="row">
+                <div class="input-field col s3">
+                    <input id="nameSearch" type="text" class="validate">
+                    <label for="nameSearch">Room name</label>
+                </div>
+                <div class="input-field col s2">
+                    <select multiple >
+                        <option value="" disabled selected>Select</option>
+                        <option value="Rock">Rock</option>
+                        <option value="Jazz">Jazz</option>
+                        <option value="Hip Hop">Hip Hop</option>
+                        <option value="Classic">Classic</option>
+                    </select>
+                    <label>Music types</label>
+                </div>
+                <div class="input-field col s2">
+                    <select multiple>
+                        <option value="" disabled selected>Select</option>
+                        <option value="Beginner">Beginner</option>
+                        <option value="Intermediate">Intermediate</option>
+                        <option value="Expert">Expert</option>
+                    </select>
+                    <label>Level</label>
+                </div>
+                <div class="input-field col s2">
+                    <select multiple>
+                        <option value="" disabled selected>Select</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                    </select>
+                    <label>Number of player</label>
+                </div>
+                <div class="input-field col s2">
+                    <select multiple>
+                        <option value="" disabled selected>Select</option>
+                        <option value="Private">Public</option>
+                        <option value="Public">Private</option>
+                    </select>
+                    <label>Access type</label>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="row" ng-show="AllRooms">
+
+            <ul class="collection">
+                <li class="collection-item avatar" ng-repeat="(key,value) in AllRooms">
+                    <i class="material-icons circle green">insert_chart</i>
+                    <span class="title">{{key}}</span>
+                    <p>Style : {{value.MusicStyle}} <br>
+                        Players : {{value.numberOfPlayers}}
+                    </p>
+                    <a href="#!" class="secondary-content"><i class="material-icons">send</i></a>
+                </li>
+
+            </ul>
+
+        </div>
+
+        <script type="text/javascript">
+            $(document).ready(function() {
+                $('select').material_select();
+            });
+        </script>
+
+    </div>
+
+</div>

@@ -17,8 +17,15 @@ app.config(['$routeProvider', function ($routeProvider) {
             templateUrl: '/pages/error.html',
             controller: 'HomeController'
         })
-        .when('/test', {
-            templateUrl: '/pages/signup.html',
+        .when('/resetPassword', {
+            templateUrl: '/pages/resetPassword.html'
+        })
+        .when('/create_room', {
+            templateUrl: '/pages/create_room.html',
+            controller: 'HomeController'
+        })
+        .when('/join_room', {
+            templateUrl: '/pages/join_room.html',
             controller: 'HomeController'
         });
 }]);

@@ -1,5 +1,9 @@
 app.controller('HomeController', function ($scope) {
 
+    db.ref('/rooms').once('value').then(function(snapshot) {
+        $scope.AllRooms = snapshot.val();
+        $scope.$apply()
+    });
 
     $scope.usernameValid = false;
 
@@ -15,5 +19,7 @@ app.controller('HomeController', function ($scope) {
             }
         })
     };
+
+
 
 });
