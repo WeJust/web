@@ -10,7 +10,7 @@ app.controller('MainController',function ($scope,$http) {
         $scope.userEmail = $scope.firebaseUser.email;
         $scope.emailVerified = $scope.firebaseUser.emailVerified;
         console.log($scope.uid);
-        Materialize.toast($scope.uid + " " + $scope.userName + " " + $scope.userEmail + " "
+        Materialize.toast($scope.uid + " " + $scope.userName + " " + $scope.userEmailz + " "
             +$scope.emailVerified,2000);
     }
 });

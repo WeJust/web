@@ -103,26 +103,37 @@ app.post('/signup', function (req, res) {
     /* create account */
     db_add("username/"+username,{instrument : "guitare"});
 
-    firebase.auth().createUserWithEmailAndPassword(email,password).catch(function (error) {
+    firebase.auth().createUserWithEmailAndPassword(email,password)
+        .then(function (firebaseuser) {
 
-        var errorCode = error.code;
-        var errorMessage = error.message;
+            firebaseuser.updateProfile({
+                displayName: username
+            }).then(function () {
+                res.redirect('/#!/home');
+            }, function (error) {
+                var errorCode = error.code;
+                var errorMessage = error.message;
 
-        console.log("Error Firebase ! " + errorCode + " : " + errorMessage);
-    });
+                console.log("Error Firebase ! " + errorCode + " : " + errorMessage);
 
-    firebase.auth().currentUser.updateProfile({
-        displayName: username
-    }).then(function () {
-        res.redirect('/#!/home');
-    }, function (error) {
-        res.send("An error occured");
-    });
+                res.redirect('/#!/error');
+            });
+
+        })
+        .catch(function (error) {
+
+            var errorCode = error.code;
+            var errorMessage = error.message;
+
+            console.log("Error Firebase ! " + errorCode + " : " + errorMessage);
+        });
+
+
 });
 
 app.get('/getFirebaseUser', function (req, res) {
     console.log("Checkpoint reach");
-   res.send(user);
+    res.send(user);
 });
 
 app.post('/login',function (req, res) {
