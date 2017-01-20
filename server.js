@@ -156,7 +156,6 @@ app.post('/login',function (req, res) {
 app.post('/create_room',function (req, res) {
 
     var json = JSON.parse(JSON.stringify(req.body));
-    delete json.name;
 
     db.ref("rooms/"+req.body.name).set(json);
     res.redirect("/#!/home");

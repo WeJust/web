@@ -20,6 +20,24 @@ app.controller('HomeController', function ($scope) {
         })
     };
 
+    $scope.toArray = function(items) {
+        var result = [];
+        angular.forEach(items, function(value) {
+            result.push(value);
+        });
+        return result;
+    };
 
 
+
+
+    $scope.selectSearch = function (array,room,value) {
+
+        if (array[value].length == 0){
+            return true;
+        }else{
+            return array[value].includes(room[value]);
+        }
+
+    }
 });
