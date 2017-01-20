@@ -1,0 +1,27 @@
+<div class="container" style="overflow:hidden;padding:15px">
+    <div id="row-wave" class="row">
+        <div id="waveform1" style="display:none"></div>
+        <div id="waveform2" style="display:none"></div>
+        <div id="waveform-timeline" style="display:none"></div>
+        <div class="col s12 center">
+            <div class="preloader-wrapper big active">
+                <div class="spinner-layer spinner-blue-only">
+                    <div class="circle-clipper left">
+                        <div class="circle"></div>
+                    </div><div class="gap-patch">
+                    <div class="circle"></div>
+                </div><div class="circle-clipper right">
+                    <div class="circle"></div>
+                </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <button class="btn btn-primary" ng-click="wavesurfer.playPause();wavesurfer2.playPause()">
+        <i class="glyphicon glyphicon-play"></i>
+        Play
+    </button>
+
+
+</div>

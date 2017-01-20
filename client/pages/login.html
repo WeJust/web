@@ -50,35 +50,22 @@
         </div>
     </div>
 
-    <div class="sweet-alert showSweetAlert visible"></div>
-
 </div>
 
-
 <script type="text/javascript">
-
     $("#resetEmail").click(function () {
 
         var auth = firebase.auth();
 
-
-
-
         swal({  title: "Reset passsword",
-            text: "An email to reset your password will be send",
+            text: "An email will be send to reset your password",
             type: "question",
             showCancelButton: true,
             input:"email",
-            closeOnConfirm: false,
             inputPlaceholder: "Your email adress"
-        }).then( function(inputValue){
-            if (inputValue === false) return false;
-            if (inputValue === "") {
-                swal.showInputError("You need to write something!");
-                return false
-            }
-            auth.sendPasswordResetEmail(inputValue).then(function() {
-                swal("Nice!", "An email has been send to : " + inputValue, "success");
+        }).then( function(email){
+            auth.sendPasswordResetEmail(email).then(function() {
+                swal("Nice!", "An email has been send to : " + email, "success");
             }, function(error) {
                 var errorCode = error.code;
                 var errorMessage = error.message;
@@ -88,5 +75,4 @@
 
         });
     });
-
 </script>

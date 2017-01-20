@@ -24,6 +24,10 @@ app.config(['$routeProvider', function ($routeProvider) {
             templateUrl: '/pages/create_room.html',
             controller: 'HomeController'
         })
+        .when('/room', {
+            templateUrl: '/pages/room.html',
+            controller: 'RoomController'
+        })
         .when('/join_room', {
             templateUrl: '/pages/join_room.html',
             controller: 'HomeController'

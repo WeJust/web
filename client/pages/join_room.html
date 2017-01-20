@@ -79,10 +79,14 @@
                         Level : {{room.level}}
                         <br>
                     </p>
-                    <div ng-show="room.access=='Private'">
-                        <i class="material-icons" >https</i>
-                    </div>
-                    <a href="#!" class="secondary-content"><i class="material-icons">send</i></a>
+
+                    <button ng-show="room.access=='Private'"
+                            class="btn-flat join_button_private secondary-content" ng-click="passwordAlert(room)">
+                        <i class="material-icons">https</i>
+                    </button>
+                    <a href="#!" ng-show="room.access=='Public'" class=" btn-flat secondary-content">
+                        <i class="material-icons">send</i>
+                    </a>
 
                 </li>
             </ul>
@@ -94,6 +98,8 @@
             });
         </script>
 
-    </div>
+        <script type="text/javascript">
 
+        </script>
+    </div>
 </div>
