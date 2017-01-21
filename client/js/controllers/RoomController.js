@@ -9,7 +9,7 @@ app.controller('RoomController', function ($scope) {
         container: '#waveform2'
     });
 
-    $scope.wavesurfer.load('http://ia902606.us.archive.org/35/items/shortpoetry_047_librivox/contentment_holmes_jb.mp3');
+    $scope.wavesurfer.load('https://firebasestorage.googleapis.com/v0/b/wejust-def99.appspot.com/o/test%2FMHD.mp3?alt=media&token=0d4d2062-a2df-4e1f-b5c6-aa6c83a29b10');
     $scope.wavesurfer2.load('http://ia902606.us.archive.org/35/items/shortpoetry_047_librivox/song_cjrg_teasdale_64kb.mp3');
 
 
@@ -47,7 +47,7 @@ app.controller('RoomController', function ($scope) {
                 height : 64
             });
 
-            $scope.wavesurfer.load('http://ia902606.us.archive.org/35/items/shortpoetry_047_librivox/contentment_holmes_jb.mp3');
+            $scope.wavesurfer.load('https://firebasestorage.googleapis.com/v0/b/wejust-def99.appspot.com/o/test%2FMHD.mp3?alt=media&token=0d4d2062-a2df-4e1f-b5c6-aa6c83a29b10');
             $scope.wavesurfer2.load('http://ia902606.us.archive.org/35/items/shortpoetry_047_librivox/song_cjrg_teasdale_64kb.mp3');
 
         }
