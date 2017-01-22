@@ -14,4 +14,9 @@
     background: #5fdc64;
 }
 
-
+.dropdown-button{
+    margin-right: 30px;
+    min-width: 200px;
+    text-align:center;
+    cursor:pointer;
+}

@@ -1,0 +1,71 @@
+<div class="container">
+
+    <div class="row">
+
+        <div class="row">
+
+            <div class="col s12 center-align">
+                <h1>My Profile</h1>
+            </div>
+        </div>
+        <div class="row">
+
+            <div class="row">
+                <div class="col s6">
+                    <ul class="tabs">
+                        <li class="tab col s4"><a class="active" href="#membres">Membres</a></li>
+                        <li class="tab col s4"><a href="#groupes">Groupes</a></li>
+                        <li class="tab col s4"><a href="#hashtag">#</a></li>
+                    </ul>
+                </div>
+
+                <div class="col s6">
+                    <ul class="tabs">
+                        <li class="tab col s4"><a class="active" href="#jams">Ses jams en cours</a></li>
+                        <li class="tab col s4"><a href="#prestations">Ses prestations en cours</a></li>
+                        <li class="tab col s4"><a href="#projets">Ses projets finis</a></li>
+                    </ul>
+                </div>
+
+
+            </div>
+
+            <div class="row">
+                <div class="col s6">
+
+                    <div id="membres" class="col s12">
+
+                        JUGURTHA
+                    </div>
+                    <div id="groupes" class="col s12">Mes groupes</div>
+                    <div id="hashtag" class="col s12">???</div>
+
+                </div>
+
+                <div class="col s6">
+                    <div id="jams" class="col s12">A venir</div>
+                    <div id="prestations" class="col s12">A venir</div>
+                    <div id="projets" class="col s12">A venir</div>
+                </div>
+
+
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+
+    <script>
+        $(".button-collapse").sideNav();
+
+        $(document).ready(function(){
+            $('ul.tabs').tabs();
+        });
+
+        $(document).ready(function(){
+            $('.collapsible').collapsible();
+        });
+    </script>

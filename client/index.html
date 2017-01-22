@@ -21,10 +21,34 @@
         <div class="nav-wrapper black">
             <a href="/" class="brand-logo">We Just</a>
             <ul class="right hide-on-med-and-down">
-                <li><a href="#">A link</a></li>
-                <li><a class="waves-effect waves-light btn orange" href = "/">button</a></li>
-                <li><a class="waves-effect waves-light btn cyan darken-3" href="/">button</a></li>
-                <li><a class="waves-effect waves-light btn-large green" href = "/">button</a></li>
+                <li>
+                    <div class="dropdown-button" data-activates='dropdown_communaute' data-beloworigin="true" data-constrainwidth="true">Communauté</div>
+                    <ul id='dropdown_communaute' class='dropdown-content'>
+                        <li><a href="#!">Mon profil</a></li>
+                        <li><a href="#!">Les autres</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <div class="dropdown-button" data-activates='dropdown_jams' data-beloworigin="true" data-constrainwidth="true">Jams</div>
+                    <ul id='dropdown_jams' class='dropdown-content'>
+                        <li><a href="#!">Rechercher une Jam</a></li>
+                        <li><a href="#!">Créer une Jam</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <div class="dropdown-button" data-activates='dropdown_prestations' data-beloworigin="true" data-constrainwidth="true">Prestations</div>
+                    <ul id='dropdown_prestations' class='dropdown-content'>
+                        <li><a href="#!">Rechercher une prestation</a></li>
+                        <li><a href="#!">Commander une prestation</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <div class="dropdown-button" data-activates='dropdown_pushtrack' data-beloworigin="true" data-constrainwidth="true">Push!</div>
+                    <ul id='dropdown_pushtrack' class='dropdown-content'>
+                        <li><a href="#!">Push! Track</a></li>
+                        <li><a href="#!">Mon Push! Track</a></li>
+                    </ul>
+                </li>
 
             </ul>
         </div>
@@ -49,6 +73,7 @@
     };
     firebase.initializeApp(config);
     var db = firebase.database();
+
 </script>
 
 <script src=https://cdn.jsdelivr.net/sweetalert2/6.3.2/sweetalert2.min.js></script>
