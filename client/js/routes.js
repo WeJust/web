@@ -27,6 +27,7 @@ app.config(['$routeProvider', function ($routeProvider) {
         .when('/my_profile', {
             templateUrl: '/pages/profile.html',
             controller: 'HomeController'
+        })
         .when('/room', {
             templateUrl: '/pages/room.html',
             controller: 'RoomController'
