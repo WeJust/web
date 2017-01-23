@@ -23,8 +23,6 @@ app.controller('RoomController', function ($scope,$interval) {
   }
 
   $scope.playAllTracks = function(time){
-    console.log($scope.currentTime);
-    console.log($scope.timeCursor);
     TracksURLs.forEach(function(url,i) {
       if (time < WaveSurfers[i].getDuration())
       WaveSurfers[i].play(time);
@@ -74,7 +72,7 @@ app.controller('RoomController', function ($scope,$interval) {
         container: '#waveform'+num,
         waveColor: Colors[i],
         progressColor: 'grey',
-        interact : false,
+        interact : true,
         height : 64,
         hideScrollbar : true
       });
@@ -126,11 +124,20 @@ app.controller('RoomController', function ($scope,$interval) {
           container: '#waveform'+i,
           waveColor: Colors[i],
           progressColor: 'grey',
-          interact : false,
+          interact : true,
           height : 64,
           hideScrollbar : true
         });
         WaveSurfers[i].load(url);
+
+        WaveSurfers[i].on('seek', function (progress) {
+          console.log(WaveSurfers[i].getCurrentTime());
+          $scope.placeCursor(WaveSurfers[i].getCurrentTime());
+          $scope.timeCursor = WaveSurfers[i].getCurrentTime()*10000;
+        });
+
+
+
       });
     });
 
