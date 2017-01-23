@@ -1,0 +1,105 @@
+<div class="container">
+
+    <div class="row">
+
+            <div class="row">
+
+                <div class="col s12 center-align">
+                    <h1>My Profile</h1>
+                </div>
+            </div>
+            <div class="row">
+
+                <div class="row">
+                    <div class="col s6">
+                        <ul class="tabs">
+                            <li class="tab col s2"><a class="active" href="#moi">Moi</a></li>
+                            <li class="tab col s2"><a href="#groupes">Mes groupes</a></li>
+                            <li class="tab col s2"><a href="#hashtag">#</a></li>
+                            <li class="tab col s2"><a href="#messagerie">Messagerie</a></li>
+                            <li class="tab col s3"><a href="#notifications">Notifications</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="col s6">
+                        <ul class="tabs">
+                            <li class="tab col s4"><a class="active" href="#jams">Mes jams en cours</a></li>
+                            <li class="tab col s4"><a href="#prestations">Mes prestations en cours</a></li>
+                            <li class="tab col s4"><a href="#projets">Mes projets finis</a></li>
+                        </ul>
+                    </div>
+
+
+            </div>
+
+             <div class="row">
+                 <div class="col s6">
+
+                    <div id="moi" class="col s12">
+
+                        <div class="row">
+
+                            <div class="card-panel grey lighten-5 z-depth-1">
+                                <div class="row valign-wrapper">
+                                    <div class="col s4">
+                                        <img src="/../img/profile.jpg" alt="" class="responsive-img"> <!-- notice the "circle" class -->
+                                    </div>
+                                    <div class="col s8">
+                                    <span class="black-text">
+                                     Pseudo
+                                    </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                        <ul class="collapsible" data-collapsible="accordion">
+                            <li>
+                                <div class="collapsible-header"><i class="material-icons">filter_drama</i>Vidéos</div>
+                                <div class="collapsible-body"><p>Lorem ipsum dolor sit amet.</p></div>
+                            </li>
+                            <li>
+                                <div class="collapsible-header"><i class="material-icons">place</i>Photos</div>
+                                <div class="collapsible-body"><p>Lorem ipsum dolor sit amet.</p></div>
+                            </li>
+                            <li>
+                                <div class="collapsible-header"><i class="material-icons">whatshot</i>Paroles</div>
+                                <div class="collapsible-body"><p>Lorem ipsum dolor sit amet.</p></div>
+                            </li>
+                        </ul>
+                        </div>
+                    </div>
+                    <div id="groupes" class="col s12">Mes groupes</div>
+                    <div id="hashtag" class="col s12">???</div>
+                    <div id="messagerie" class="col s12">Messagerie</div>
+                    <div id="notifications" class="col s12">Notifications</div>
+
+             </div>
+
+                 <div class="col s6">
+                    <div id="jams" class="col s12">A venir</div>
+                    <div id="prestations" class="col s12">A venir</div>
+                    <div id="projets" class="col s12">A venir</div>
+             </div>
+
+
+
+            </div>
+
+
+    </div>
+
+</div>
+
+
+<script>
+    $(".button-collapse").sideNav();
+
+    $(document).ready(function(){
+        $('ul.tabs').tabs();
+    });
+
+    $(document).ready(function(){
+        $('.collapsible').collapsible();
+    });
+</script>
