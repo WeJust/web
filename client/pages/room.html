@@ -1,8 +1,5 @@
 <div class="container" style="overflow:hidden;padding:15px">
-    <div id="row-wave" class="row">
-        <div id="waveform1" style="display:none"></div>
-        <div id="waveform2" style="display:none"></div>
-        <div id="waveform-timeline" style="display:none"></div>
+    <div id="row-before-wave" class="row">
         <div class="col s12 center">
             <div class="preloader-wrapper big active">
                 <div class="spinner-layer spinner-blue-only">
@@ -17,11 +14,19 @@
             </div>
         </div>
     </div>
+    <div id="row-after-wave"></div>
 
-    <button class="btn btn-primary" ng-click="wavesurfer.playPause();wavesurfer2.playPause()">
-        <i class="glyphicon glyphicon-play"></i>
-        Play
+    <div class="row">
+  <input ng-show ="AllDataLoaded" type="range" min="1" max="{{maxSize*10000}}" ng-model="timeCursor" ng-change="placeCursor(timeCursor/10000);isPlaying = false" />
+  </div>
+    <button ng-show="!isPlaying && AllDataLoaded" class="btn btn-primary" ng-click="playAllTracks(timeCursor/10000); isPlaying = !isPlaying">
+      Play {{timeCursor/10000 | number:2}}s
     </button>
-
+    <button ng-show="isPlaying && AllDataLoaded" class="btn btn-primary" ng-click="pauseAllTracks();isPlaying = !isPlaying">
+      Stop {{currentTime | number:2}}s
+    </button>
+    <button ng-show="!isPlaying && AllDataLoaded" class="btn btn-primary" ng-click="playAllTracks(currentTime);isPlaying = !isPlaying">
+      Resume
+    </button>
 
 </div>

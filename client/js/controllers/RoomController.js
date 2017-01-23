@@ -1,58 +1,153 @@
-app.controller('RoomController', function ($scope) {
+app.controller('RoomController', function ($scope,$interval) {
+  $scope.AllDataLoaded = false;
+  $scope.currentTime = 0;
+  $scope.timeCursor = 0;
+  /* FIREBASE PARAMS*/
+  $scope.roomName = "test";
+  $scope.trackNumber = 6;
+  /*----------------*/
 
-    $scope.wavesLoaded = false;
+  var TracksURLs = [];
+  var Colors = ['orange','blue','red','yellow','green','pink','black','grey'];
+  var NumberOfTracks = 2;
+  var Promises0 = [];
+  var Promises = [];
+  var Promises2 = [];
+  var WaveSurfers = [];
+  var WaveSurfersReady = false;
+  var Durations = [];
+  var Sizes = [];
 
-    $scope.wavesurfer = WaveSurfer.create({
-        container: '#waveform1'
+  for ( i =0; i <$scope.trackNumber;i++){
+    TracksURLs[i] = "";
+  }
+
+  $scope.playAllTracks = function(time){
+    console.log($scope.currentTime);
+    console.log($scope.timeCursor);
+    TracksURLs.forEach(function(url,i) {
+      if (time < WaveSurfers[i].getDuration())
+      WaveSurfers[i].play(time);
     });
-    $scope.wavesurfer2 = WaveSurfer.create({
-        container: '#waveform2'
+  }
+  $scope.pauseAllTracks = function(){
+    TracksURLs.forEach(function(url,i) {
+      WaveSurfers[i].pause();
+    });
+  }
+
+  $scope.placeCursor = function(time){
+    $scope.currentTime = time;
+    TracksURLs.forEach(function(url,i) {
+      if (WaveSurfers[i] && time < WaveSurfers[i].getDuration()){
+        WaveSurfers[i].play(time);
+        WaveSurfers[i].pause();
+      }else if (WaveSurfers[i] && time >= WaveSurfers[i].getDuration()){
+        WaveSurfers[i].play(WaveSurfers[i].getDuration());
+        WaveSurfers[i].pause();
+      }
+    });
+  }
+
+  $scope.updateTrack = function(num,url){
+
+    WaveSurfers[num].destroy();
+    WaveSurfers[num]= WaveSurfer.create({
+      container: '#waveform'+num,
+    });
+    WaveSurfers[num].load(url);
+    WaveSurfers[num].on('ready', function () {
+      var size = WaveSurfers[num].getDuration();
+      if (size > $scope.maxSize){
+        $scope.maxSize = size;
+
+        /*
+        il faut resize toute les wavforms ici
+
+        */
+
+      }
+      var div_size = size*100/$scope.maxSize;
+      $("#waveform"+num).replaceWith('<div id="waveform'+num+'" style="width : '+div_size+'%">');
+      WaveSurfers[num].destroy();
+      WaveSurfers[num]= WaveSurfer.create({
+        container: '#waveform'+num,
+        waveColor: Colors[i],
+        progressColor: 'grey',
+        interact : true,
+        height : 64,
+        hideScrollbar : true
+      });
+      WaveSurfers[num].load(url);
+    })
+  }
+
+
+  TracksURLs.forEach(function(element,i) {
+    Promises0[i] = new Promise(  function(resolve, reject) {
+      storage.ref().child($scope.roomName+"/"+i+".wav").getDownloadURL().then(function(url) {
+        TracksURLs[i] = url;
+        $("#row-before-wave").append('<div id="waveform'+i+'" style="display:none">');
+        WaveSurfers[i] = WaveSurfer.create({
+          container: '#waveform'+i
+        });
+        WaveSurfers[i].load(url);
+        WaveSurfers[i].on('ready', function () {
+          Durations[i] = WaveSurfers[i].getDuration();
+          resolve();
+        })
+      })
+    })
+  })
+
+  Promise.all(Promises0).then(function() {
+    $scope.maxSize = Math.max(...Durations);
+    TracksURLs.forEach(function(url,i) {
+      WaveSurfers[i].destroy();
+      Sizes[i] = Durations[i]*100/$scope.maxSize;
+      Promises2[i] = new Promise(
+        function(resolve, reject) {
+          WaveSurfers[i].on('ready', function () {
+            resolve();
+          })
+        });
+      });
     });
 
-    $scope.wavesurfer.load('https://firebasestorage.googleapis.com/v0/b/wejust-def99.appspot.com/o/test%2FMHD.mp3?alt=media&token=0d4d2062-a2df-4e1f-b5c6-aa6c83a29b10');
-    $scope.wavesurfer2.load('http://ia902606.us.archive.org/35/items/shortpoetry_047_librivox/song_cjrg_teasdale_64kb.mp3');
+    Promise.all(Promises0.concat(Promises.concat(Promises2))).then(function(){
+      $scope.AllDataLoaded = true;
+      console.log("All data loaded");
+      $("#row-before-wave").find("div").remove();
+      TracksURLs.forEach(function(url,i) {
+        $("#row-after-wave").before('<div id="waveform'+i+'">');
+        $("#waveform"+i).css("width",Sizes[i]+"%");
 
-
-    $scope.wavesurfer.on('ready', function () {
-        if ($scope.wavesLoaded==false) {
-            var size = ($scope.wavesurfer2.getDuration()*100)/$scope.wavesurfer.getDuration();
-            console.log($scope.wavesurfer.getDuration());
-            console.log(($scope.wavesurfer2.getDuration()*100)/$scope.wavesurfer.getDuration());
-
-            $scope.wavesurfer.destroy();
-            $scope.wavesurfer2.destroy();
-            $scope.wavesLoaded = true;
-            console.log($scope.wavesLoaded);
-        }
-
-        if ($scope.wavesLoaded==true) {
-            console.log("boucle true" + $scope.wavesLoaded);
-            $("#row-wave").find("div").remove();
-            $("button").before('<div id="waveform1"></div><div id="waveform2"></div><div id="waveform-timeline"></div>');
-            $("#waveform2").css("width",size+"%");
-
-            $scope.wavesurfer = WaveSurfer.create({
-                container: '#waveform1',
-                waveColor: 'violet',
-                progressColor: 'purple',
-                interact : false,
-                height : 64
-            });
-
-            $scope.wavesurfer2 = WaveSurfer.create({
-                container: '#waveform2',
-                waveColor: 'orange',
-                progressColor: 'purple',
-                interact : false,
-                height : 64
-            });
-
-            $scope.wavesurfer.load('https://firebasestorage.googleapis.com/v0/b/wejust-def99.appspot.com/o/test%2FMHD.mp3?alt=media&token=0d4d2062-a2df-4e1f-b5c6-aa6c83a29b10');
-            $scope.wavesurfer2.load('http://ia902606.us.archive.org/35/items/shortpoetry_047_librivox/song_cjrg_teasdale_64kb.mp3');
-
-        }
-
+        WaveSurfers[i]= WaveSurfer.create({
+          container: '#waveform'+i,
+          waveColor: Colors[i],
+          progressColor: 'grey',
+          interact : true,
+          height : 64,
+          hideScrollbar : true
+        });
+        WaveSurfers[i].load(url);
+      });
     });
 
+    if ($scope.AllDataLoaded){
 
-});
+
+
+    }
+
+
+
+
+    var updateCurrentTime = function (){
+      if (Durations.indexOf($scope.maxSize) != -1)
+      $scope.currentTime = WaveSurfers[Durations.indexOf($scope.maxSize)].getCurrentTime();
+    };
+
+    $interval(updateCurrentTime, 100);
+
+  });
