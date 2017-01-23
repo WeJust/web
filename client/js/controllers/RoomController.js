@@ -74,7 +74,7 @@ app.controller('RoomController', function ($scope,$interval) {
         container: '#waveform'+num,
         waveColor: Colors[i],
         progressColor: 'grey',
-        interact : true,
+        interact : false,
         height : 64,
         hideScrollbar : true
       });
@@ -126,7 +126,7 @@ app.controller('RoomController', function ($scope,$interval) {
           container: '#waveform'+i,
           waveColor: Colors[i],
           progressColor: 'grey',
-          interact : true,
+          interact : false,
           height : 64,
           hideScrollbar : true
         });
