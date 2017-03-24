@@ -165,12 +165,10 @@ app.post('/create_room',function (req, res) {
 app.post('/upload_file_from_plugin',function (req, res) {
 
 console.log(req)
-  console.log("****************")
-console.log(req.body)
-console.log(req.body.files)
-console.log(req.body.file)
-console.log(req.files)
-console.log(req.file)
+  console.log("*********************************************************************************************************")
+Object.keys(req).forEach(function(k, v){
+    console.log(k);
+});
 
   console.log("--POST -- UPLOADDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD")
   
