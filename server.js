@@ -163,13 +163,15 @@ app.post('/create_room',function (req, res) {
 });
 
 app.post('/upload_file_from_plugin',function (req, res) {
-  console.log("--POST -- UPLOADDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD")
+
 console.log(req)
+  console.log("--POST -- UPLOADDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD")
 
 });
 app.get('/upload_file_from_plugin',function (req, res) {
-  console.log("-- GET -- UPLOADDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD")
+
 console.log(req)
+  console.log("-- GET -- UPLOADDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD")
 
 });
 
