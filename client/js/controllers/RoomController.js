@@ -4,17 +4,15 @@ app.controller('RoomController', function ($scope,$interval) {
   $scope.timeCursor = 0;
   /* FIREBASE PARAMS*/
   $scope.roomName = "test";
-  $scope.trackNumber = 6;
+  $scope.trackNumber = 5;
   /*----------------*/
 
   var TracksURLs = [];
   var Colors = ['orange','blue','red','yellow','green','pink','black','grey'];
-  var NumberOfTracks = 2;
   var Promises0 = [];
   var Promises = [];
   var Promises2 = [];
   var WaveSurfers = [];
-  var WaveSurfersReady = false;
   var Durations = [];
   var Sizes = [];
 
@@ -47,38 +45,51 @@ app.controller('RoomController', function ($scope,$interval) {
     });
   }
 
-  $scope.updateTrack = function(num,url){
+  $scope.updateTrack = function(num){
 
-    WaveSurfers[num].destroy();
-    WaveSurfers[num]= WaveSurfer.create({
-      container: '#waveform'+num,
-    });
-    WaveSurfers[num].load(url);
-    WaveSurfers[num].on('ready', function () {
-      var size = WaveSurfers[num].getDuration();
-      if (size > $scope.maxSize){
-        $scope.maxSize = size;
+    storage.ref().child($scope.roomName+"/"+num+".wav").getDownloadURL().then(function(url) {
+      TracksURLs[num] = url;
+      $("#wavform"+num).replaceWith('<div id="waveform'+num+'" style="display:none">');
+      WaveSurfers[num] = WaveSurfer.create({
+        container: '#waveform'+num
+      });
+      WaveSurfers[num].load(url);
+      WaveSurfers[num].on('ready', function () {
+        Durations[num] = WaveSurfers[num].getDuration();
+        resolve();
+      })
 
-        /*
-        il faut resize toute les wavforms ici
-
-        */
-
-      }
-      var div_size = size*100/$scope.maxSize;
-      $("#waveform"+num).replaceWith('<div id="waveform'+num+'" style="width : '+div_size+'%">');
       WaveSurfers[num].destroy();
       WaveSurfers[num]= WaveSurfer.create({
         container: '#waveform'+num,
-        waveColor: Colors[i],
-        progressColor: 'grey',
-        interact : true,
-        height : 64,
-        hideScrollbar : true
       });
       WaveSurfers[num].load(url);
+      WaveSurfers[num].on('ready', function () {
+        var size = WaveSurfers[num].getDuration();
+        if (size > $scope.maxSize){
+          $scope.maxSize = size;
+
+          /*
+          il faut resize toute les wavforms ici
+          */
+
+        }
+        var div_size = size*100/$scope.maxSize;
+        $("#waveform"+num).replaceWith('<div id="waveform'+num+'" style="width : '+div_size+'%">');
+        WaveSurfers[num].destroy();
+        WaveSurfers[num]= WaveSurfer.create({
+          container: '#waveform'+num,
+          waveColor: Colors[num],
+          progressColor: 'grey',
+          interact : true,
+          height : 64,
+          hideScrollbar : true
+        });
+        WaveSurfers[num].load(url);
+      })
     })
   }
+
 
 
   TracksURLs.forEach(function(element,i) {
@@ -119,7 +130,6 @@ app.controller('RoomController', function ($scope,$interval) {
       TracksURLs.forEach(function(url,i) {
         $("#row-after-wave").before('<div id="waveform'+i+'">');
         $("#waveform"+i).css("width",Sizes[i]+"%");
-
         WaveSurfers[i]= WaveSurfer.create({
           container: '#waveform'+i,
           waveColor: Colors[i],
@@ -131,30 +141,18 @@ app.controller('RoomController', function ($scope,$interval) {
         WaveSurfers[i].load(url);
 
         WaveSurfers[i].on('seek', function (progress) {
-          console.log(WaveSurfers[i].getCurrentTime());
           $scope.placeCursor(WaveSurfers[i].getCurrentTime());
           $scope.timeCursor = WaveSurfers[i].getCurrentTime()*10000;
         });
 
-
-
       });
     });
-
-    if ($scope.AllDataLoaded){
-
-
-
-    }
-
-
-
 
     var updateCurrentTime = function (){
       if (Durations.indexOf($scope.maxSize) != -1)
       $scope.currentTime = WaveSurfers[Durations.indexOf($scope.maxSize)].getCurrentTime();
     };
 
-    $interval(updateCurrentTime, 100);
+    $interval(updateCurrentTime, 10);
 
   });

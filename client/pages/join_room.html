@@ -1,105 +1,105 @@
 <div class="container">
 
+  <div class="row">
     <div class="row">
-        <div class="row">
 
-            <div class="col s12 center-align">
-                <h1>Join room</h1>
-                <!--<p>{{toArray(AllRooms)}}</p> -->
-            </div>
-            <div class="progress" ng-hide="AllRooms">
-                <div class="indeterminate"></div>
-            </div>
-        </div>
-        <div class="row">
-            <p>Search a specific room</p>
-            <div class="row">
-                <div class="input-field col s3">
-                    <input id="nameSearch" type="text" class="validate" ng-model="search.name">
-                    <label for="nameSearch">Room name</label>
-                </div>
-                <div class="input-field col s2">
-                    <select multiple ng-model="search2.musicStyle">
-                        <option value="" disabled selected>Select</option>
-                        <option value="Rock">Rock</option>
-                        <option value="Jazz">Jazz</option>
-                        <option value="Hip Hop">Hip Hop</option>
-                        <option value="Classic">Classic</option>
-                    </select>
-                    <label>Music types</label>
-                </div>
-                <div class="input-field col s2">
-                    <select multiple ng-model="search2.level">
-                        <option value="" disabled selected>Select</option>
-                        <option value="Beginner">Beginner</option>
-                        <option value="Intermediate">Intermediate</option>
-                        <option value="Expert">Expert</option>
-                    </select>
-                    <label>Level</label>
-                </div>
-                <div class="input-field col s2">
-                    <select multiple ng-model="search2.numberOfPlayers">
-                        <option value="" disabled selected>Select</option>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                        <option value="6">6</option>
-                    </select>
-                    <label>Number of player</label>
-                </div>
-                <div class="input-field col s2">
-                    <select multiple ng-model="search2.access">
-                        <option value="" disabled selected>Select</option>
-                        <option value="Private">Private</option>
-                        <option value="Public">Public</option>
-                    </select>
-                    <label>Access type</label>
-                </div>
-
-            </div>
-        </div>
-
-        <div class="row" ng-show="AllRooms">
-
-            <ul class="collection">
-                <li class="collection-item avatar" ng-repeat="room in toArray(AllRooms)| filter:search"
-                    ng-show="selectSearch(search2,room,'musicStyle')
-                    && selectSearch(search2,room,'level')
-                    && selectSearch(search2,room,'numberOfPlayers')
-                    && selectSearch(search2,room,'access')">
-
-                    <i class="material-icons circle green">insert_chart</i>
-                    <span class="title">{{room.name}}</span>
-                    <p>Style : {{room.musicStyle}}
-                        <br>
-                        Players : {{room.numberOfPlayers}}
-                        <br>
-                        Level : {{room.level}}
-                        <br>
-                    </p>
-
-                    <button ng-show="room.access=='Private'"
-                            class="btn-flat join_button_private secondary-content" ng-click="passwordAlert(room)">
-                        <i class="material-icons">https</i>
-                    </button>
-                    <a href="#!" ng-show="room.access=='Public'" class=" btn-flat secondary-content">
-                        <i class="material-icons">send</i>
-                    </a>
-
-                </li>
-            </ul>
-        </div>
-
-        <script type="text/javascript">
-            $(document).ready(function() {
-                $('select').material_select();
-            });
-        </script>
-
-        <script type="text/javascript">
-
-        </script>
+      <div class="col s12 center-align">
+        <h1>Join room</h1>
+        <!--<p>{{toArray(AllRooms)}}</p> -->
+      </div>
+      <div class="progress" ng-hide="AllRooms">
+        <div class="indeterminate"></div>
+      </div>
     </div>
+    <div class="row">
+      <p>Search a specific room</p>
+      <div class="row">
+        <div class="input-field col s3">
+          <input id="nameSearch" type="text" class="validate" ng-model="search.name">
+          <label for="nameSearch">Room name</label>
+        </div>
+        <div class="input-field col s2">
+          <select multiple ng-model="search2.musicStyle">
+            <option value="" disabled selected>Select</option>
+            <option value="Rock">Rock</option>
+            <option value="Jazz">Jazz</option>
+            <option value="Hip Hop">Hip Hop</option>
+            <option value="Classic">Classic</option>
+          </select>
+          <label>Music types</label>
+        </div>
+        <div class="input-field col s2">
+          <select multiple ng-model="search2.level">
+            <option value="" disabled selected>Select</option>
+            <option value="Beginner">Beginner</option>
+            <option value="Intermediate">Intermediate</option>
+            <option value="Expert">Expert</option>
+          </select>
+          <label>Level</label>
+        </div>
+        <div class="input-field col s2">
+          <select multiple ng-model="search2.numberOfPlayers">
+            <option value="" disabled selected>Select</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+          </select>
+          <label>Number of player</label>
+        </div>
+        <div class="input-field col s2">
+          <select multiple ng-model="search2.access">
+            <option value="" disabled selected>Select</option>
+            <option value="Private">Private</option>
+            <option value="Public">Public</option>
+          </select>
+          <label>Access type</label>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="row" ng-show="AllRooms">
+
+      <ul class="collection">
+        <li class="collection-item avatar" ng-repeat="room in toArray(AllRooms)| filter:search"
+        ng-show="selectSearch(search2,room,'musicStyle')
+        && selectSearch(search2,room,'level')
+        && selectSearch(search2,room,'numberOfPlayers')
+        && selectSearch(search2,room,'access')">
+
+        <i class="material-icons circle green">insert_chart</i>
+        <span class="title">{{room.name}}</span>
+        <p>Style : {{room.musicStyle}}
+          <br>
+          Players : {{room.numberOfPlayers}}
+          <br>
+          Level : {{room.level}}
+          <br>
+        </p>
+
+        <button ng-show="room.access=='Private'"
+        class="btn-flat join_button_private secondary-content" ng-click="passwordAlert(room)">
+        <i class="material-icons">https</i>
+      </button>
+      <a href="#!" ng-show="room.access=='Public'" class=" btn-flat secondary-content">
+        <i class="material-icons">send</i>
+      </a>
+
+    </li>
+  </ul>
+</div>
+
+<script type="text/javascript">
+$(document).ready(function() {
+  $('select').material_select();
+});
+</script>
+
+<script type="text/javascript">
+
+</script>
+</div>
 </div>

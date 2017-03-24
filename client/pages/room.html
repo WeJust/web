@@ -1,3 +1,10 @@
+<style>
+.preloader-wrapper {
+    width: 150px!important;
+    height: 150px!important;
+}
+</style>
+
 <div class="container" style="overflow:hidden;padding:15px">
     <div id="row-before-wave" class="row">
         <div class="col s12 center">
@@ -15,6 +22,9 @@
         </div>
     </div>
     <div id="row-after-wave"></div>
+    <button class="btn btn-primary" ng-click="updateTrack(3)">
+      Update
+    </button>
 
     <div class="row">
   <input ng-show ="AllDataLoaded" type="range" min="1" max="{{maxSize*10000}}" ng-model="timeCursor" ng-change="placeCursor(timeCursor/10000);isPlaying = false" />
@@ -23,7 +33,7 @@
       Play {{timeCursor/10000 | number:2}}s
     </button>
     <button ng-show="isPlaying && AllDataLoaded" class="btn btn-primary" ng-click="pauseAllTracks();isPlaying = !isPlaying">
-      Stop {{currentTime | number:2}}s
+      Pause {{currentTime | number:2}}s
     </button>
     <button ng-show="!isPlaying && AllDataLoaded" class="btn btn-primary" ng-click="playAllTracks(currentTime);isPlaying = !isPlaying">
       Resume

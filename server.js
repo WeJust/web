@@ -162,6 +162,17 @@ app.post('/create_room',function (req, res) {
 
 });
 
+app.post('/upload_file_from_plugin',function (req, res) {
+  console.log("--POST -- UPLOADDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD")
+console.log(req)
+
+});
+app.get('/upload_file_from_plugin',function (req, res) {
+  console.log("-- GET -- UPLOADDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD")
+console.log(req)
+
+});
+
 
 io.on('connection', function (socket) {
 
