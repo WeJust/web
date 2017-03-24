@@ -166,12 +166,13 @@ app.post('/upload_file_from_plugin',function (req, res) {
 
 console.log(req)
   console.log("--POST -- UPLOADDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD")
-
+res.redirect("/#!/home");
 });
 app.get('/upload_file_from_plugin',function (req, res) {
 
 console.log(req)
   console.log("-- GET -- UPLOADDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD")
+  res.redirect("/#!/home");
 
 });
 
