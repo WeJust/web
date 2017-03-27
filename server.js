@@ -12,6 +12,8 @@ var bodyParser = require('body-parser');
 var session = require('express-session');
 var CryptoJS = require("crypto-js");
 var firebase = require("firebase");
+var fs = require('fs');
+var busboy = require('connect-busboy');
 
 var user;
 var userEmail;
@@ -63,6 +65,7 @@ app.use(session(
         resave: false
     }
 ));
+app.use(busboy()); 
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
@@ -172,6 +175,14 @@ Object.keys(req).forEach(function(k, v){
 console.log("num keys :");
 console.log(Object.keys(req).length);
   console.log("--POST -- UPLOADDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD")
+    var fstream;
+    req.pipe(req.busboy);
+    req.busboy.on('file', function (fieldname, file, filename) {
+        console.log("Uploading: " + filename);
+    });
+  
+  
+  
   
   
 res.redirect("/#!/home");
