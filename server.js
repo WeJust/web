@@ -65,7 +65,8 @@ app.use(session(
         resave: false
     }
 ));
-app.use(busboy()); 
+app.use(busboy());
+app.use(fileUpload()); 
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
