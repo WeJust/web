@@ -217,6 +217,8 @@ app.post('/upload_file_from_plugin',function (req, res) {
     var info = JSON.parse(body);
     console.log(info.stargazers_count + " Stars");
     console.log(info.forks_count + " Forks");
+  }else{
+  console.log(error);
   }
 }
 
