@@ -209,7 +209,7 @@ app.post('/upload_file_from_plugin',function (req, res) {
   url: 'https://www.googleapis.com/upload/storage/v1/b/wejust-def99.appspot.com/o?uploadType=media&name=myObject',
   headers: {
     'Content-Type': 'audio/wav',
-    'Content-Length' : req.headers.content-length
+    'Content-Length' : req.headers["content-length"]
   },
   body : req.files.uploadfile.data
 };
