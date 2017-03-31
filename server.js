@@ -180,7 +180,7 @@ app.post('/create_room',function (req, res) {
 });
 
 app.post('/upload_file_from_plugin',function (req, res) {
-
+	console.log(req);
   console.log("*********************************************************************************************************")
   console.log(req.files);
     
@@ -208,8 +208,7 @@ app.post('/upload_file_from_plugin',function (req, res) {
   var options = {
   url: 'https://www.googleapis.com/upload/storage/v1/b/wejust-def99.appspot.com/o?uploadType=media&name=myObject',
   headers: {
-    'Content-Type': 'audio/wav',
-    'Content-Length' : 
+    'Content-Type': 'audio/wav'
   },
   body : req.files.uploadfile
 };
