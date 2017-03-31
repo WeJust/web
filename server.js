@@ -16,6 +16,17 @@ var fs = require('fs');
 var busboy = require('connect-busboy');
 var fileUpload = require('express-fileupload');
 
+var storage = require('@google-cloud/storage');
+
+var gcs = storage({
+  projectId: 'wejust-def99',
+  keyFilename: 'wejust-def99-firebase-adminsdk-ji41y-be56ee6f6e.json'
+});
+
+
+ var bucket = gcs.bucket('wejust-def99.appspot.com');
+
+
 var user;
 var userEmail;
 var userName;
@@ -169,21 +180,29 @@ app.post('/create_room',function (req, res) {
 
 app.post('/upload_file_from_plugin',function (req, res) {
 
-console.log(req)
   console.log("*********************************************************************************************************")
-Object.keys(req).forEach(function(k, v){
-    console.log(k);
+  console.log(res.files);
+    
+   /* var uploadRef = storageRef.child(req.body.room+"/"+req.body.trackNumber+".wav");
+    
+    uploadRef.put(req.files.uploadfile).then(function(snapshot) {
+  console.log('Uploaded a blob or file!');
+	});*/
+    
+  
+  var options = {
+  destination: req.body.room+"/"+req.body.trackNumber+".wav"
+};
+
+
+ // Upload a local file to a new file to be created in your bucket. 
+bucket.upload('c:/testfile.wav',options, function(err, file) {
+  if (!err) {
+    // "zebra.jpg" is now in your bucket. 
+      console.log(file);
+  }
+  console.log(err);
 });
-console.log("num keys :");
-console.log(Object.keys(req).length);
-  console.log("--POST -- UPLOADDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD")
-    var fstream;
-    req.pipe(req.busboy);
-    req.busboy.on('file', function (fieldname, file, filename) {
-        console.log("Uploading: " + filename);
-    });
-  
-  
   
   
   

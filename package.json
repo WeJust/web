@@ -6,16 +6,18 @@
   "repository": "",
   "author": "WejustEISTI",
   "dependencies": {
+    "@google-cloud/storage": "^0.8.0",
     "body-parser": "^1.15.2",
     "busboy": "^0.2.14",
     "connect-busboy": "0.0.2",
     "crypto-js": "^3.1.9-1",
-    "express": "^4.14.0",
+    "express": "^4.15.2",
     "express-fileupload": "^0.1.2",
     "express-session": "^1.14.2",
-    "firebase": "^3.6.3",
+    "firebase": "^3.7.4",
+    "firebase-admin": "^4.1.4",
     "fs": "0.0.1-security",
     "materialize-css": "^0.97.8",
-    "socket.io": "^1.7.2"
+    "socket.io": "^1.7.3"
   }
 }
