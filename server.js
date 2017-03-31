@@ -15,6 +15,7 @@ var firebase = require("firebase");
 var fs = require('fs');
 var busboy = require('connect-busboy');
 var fileUpload = require('express-fileupload');
+var request = require('request');
 
 var storage = require('@google-cloud/storage');
 
@@ -181,7 +182,7 @@ app.post('/create_room',function (req, res) {
 app.post('/upload_file_from_plugin',function (req, res) {
 
   console.log("*********************************************************************************************************")
-  console.log(res.files);
+  console.log(req.files);
     
    /* var uploadRef = storageRef.child(req.body.room+"/"+req.body.trackNumber+".wav");
     
@@ -190,20 +191,37 @@ app.post('/upload_file_from_plugin',function (req, res) {
 	});*/
     
   
-  var options = {
+  /*var options = {
   destination: req.body.room+"/"+req.body.trackNumber+".wav"
-};
+};*/
 
 
  // Upload a local file to a new file to be created in your bucket. 
-bucket.upload(req.body.filePath,options, function(err, file) {
+/*bucket.upload(req.body.filePath,options, function(err, file) {
   if (!err) {
     // "zebra.jpg" is now in your bucket. 
       console.log(file);
   }
   console.log(err);
-});
+});*/
   
+  var options = {
+  url: 'https://www.googleapis.com/upload/storage/v1/b/wejust-def99.appspot.com/o?uploadType=media&name=myObject',
+  headers: {
+    'Content-Type': 'audio/wav',
+    'Content-Length' : 
+  },
+  body : req.files.uploadfile
+};
+  function callback(error, response, body) {
+  if (!error && response.statusCode == 200) {
+    var info = JSON.parse(body);
+    console.log(info.stargazers_count + " Stars");
+    console.log(info.forks_count + " Forks");
+  }
+}
+
+request(options, callback);
   
   
 res.redirect("/#!/home");
