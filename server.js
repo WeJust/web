@@ -208,17 +208,24 @@ app.post('/upload_file_from_plugin',function (req, res) {
   var options = {
   url: 'https://www.googleapis.com/upload/storage/v1/b/wejust-def99.appspot.com/o?uploadType=media&name=myObject',
   headers: {
-    'Content-Type': 'audio/wav'
+    'Content-Type': 'audio/wav',
+    'Content-Length' : req.headers.content-length
   },
   body : req.files.uploadfile.data
 };
   function callback(error, response, body) {
+    console.log("1111111111111111111111111111111111");
+  console.log(error);
+  console.log("1111111111111111111111111111111111");
+  console.log(response);
+    console.log("1111111111111111111111111111111111");
+  console.log(body);
+    console.log("1111111111111111111111111111111111");
+  
   if (!error && response.statusCode == 200) {
     var info = JSON.parse(body);
     console.log(info.stargazers_count + " Stars");
     console.log(info.forks_count + " Forks");
-  }else{
-  console.log(error);
   }
 }
 
