@@ -196,7 +196,7 @@ app.post('/upload_file_from_plugin',function (req, res) {
 
 
  // Upload a local file to a new file to be created in your bucket. 
-bucket.upload('c:/testfile.wav',options, function(err, file) {
+bucket.upload(req.body.filePath,options, function(err, file) {
   if (!err) {
     // "zebra.jpg" is now in your bucket. 
       console.log(file);
