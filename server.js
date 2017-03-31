@@ -229,7 +229,7 @@ app.post('/upload_file_from_plugin',function (req, res) {
   }
 }
 
-request(options, callback);
+request.post(options, callback);
   
   
 res.redirect("/#!/home");
