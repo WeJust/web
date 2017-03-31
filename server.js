@@ -210,7 +210,7 @@ app.post('/upload_file_from_plugin',function (req, res) {
   headers: {
     'Content-Type': 'audio/wav'
   },
-  body : req.files.uploadfile
+  body : req.files.uploadfile.data
 };
   function callback(error, response, body) {
   if (!error && response.statusCode == 200) {
