@@ -30,8 +30,13 @@ const multer = Multer({
     fileSize: 300 * 1024 * 1024 // no larger than 5mb, you can change as needed.
   }
 });
-
-
+console.log("---------------------------------------***----------------------------------------");
+fs.readdir("/", (err, files) => {
+  files.forEach(file => {
+    console.log(file);
+  });
+})
+console.log("---------------------------------------***----------------------------------------");
 
 var gcs = Storage({
   projectId: 'wejust-def99',
