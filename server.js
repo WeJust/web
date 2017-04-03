@@ -16,7 +16,7 @@ var busboy = require('connect-busboy');
 var fileUpload = require('express-fileupload');
 var request = require('request');
 
-var fileupload2 = require('fileupload').createFileUpload('/wav_files2').middleware;
+
 
 var storage = require('@google-cloud/storage');
 
@@ -87,6 +87,8 @@ app.use(bodyParser.urlencoded({
     extended: true
 }));
 
+
+var fileupload2 = require('fileupload').createFileUpload('/wav_files2').middleware;
 
 var messages = [];
 var sockets = [];
