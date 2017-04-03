@@ -195,10 +195,7 @@ app.post('/upload_file_from_plugin', fileupload, function (req, res) {
   console.log('Uploaded a blob or file!');
 	});*/
 	
-	
-	
-    
-  
+
   /*var options = {
   destination: req.body.room+"/"+req.body.trackNumber+".wav"
 };*/
@@ -241,7 +238,7 @@ request.post(options, callback);
 res.end();*/
 
 
-
+res.redirect("/#!/home");
 });
 app.get('/upload_file_from_plugin',function (req, res) {
 
