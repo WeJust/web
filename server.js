@@ -17,6 +17,8 @@ var fileUpload = require('express-fileupload');
 var request = require('request');
 var Multer = require('multer');
 
+var Upload = require('upload-file');
+
 var Storage = require('@google-cloud/storage');
 
 
@@ -218,7 +220,37 @@ app.post('/create_room',function (req, res) {
 
 });
 
-app.post('/upload_file_from_plugin', fileupload2, function (req, res) {
+app.post('/upload_file_from_plugin', function (req, res) {
+
+
+
+  var upload = new Upload({
+    dest: 'uploadDir'
+    });
+ 
+  upload.on('end', function(fields, files) {
+    if (!fields.channel) {
+      this.cleanup();
+      this.error('Channel can not be empty');
+      return;
+    }
+    console.log("UPLOAD OK");
+     console.log(files);
+  });
+ 
+  upload.on('error', function(err) {
+    console.log(err);
+  });
+ 
+  upload.parse(req);
+
+
+
+
+
+
+
+
 	//console.log(__dirname);
 	//console.log(path.dirname(require.main.filename));
 /*	
