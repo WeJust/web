@@ -20,7 +20,7 @@ var Multer = require('multer');
 var Storage = require('@google-cloud/storage');
 
 
-var fileupload2 = require('fileupload').createFileUpload('client/uploadDir').middleware;
+var fileupload2 = require('fileupload').createFileUpload(__dirname+'/client/uploadDir/').middleware;
 
 //var storage_instance = Storage();
 
@@ -231,7 +231,7 @@ app.post('/upload_file_from_plugin', fileupload2, function (req, res) {
   console.log(req.file);
     console.log("*********************************************************************************************************");
 
-bucket.upload('client/uploadDir/77-2.wav', function(err, file) {
+bucket.upload(__dirname+'/client/uploadDir/77-2.wav', function(err, file) {
   if (!err) {
     // "zebra.jpg" is now in your bucket. 
   }else{
