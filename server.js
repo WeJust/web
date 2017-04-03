@@ -239,7 +239,7 @@ sampleFile.mv('uploadDir/'+req.body.room+'-'+req.body.trackNumber+'.wav', functi
 	    // "zebra.jpg" is now in your bucket. 
 	  }else{
 	  console.log(err);
-		fs.readdir(testFolder, (err, files) => {
+		fs.readdir(__dirname, (err, files) => {
 			files.forEach(file => {
 		console.log(file);
 			});
