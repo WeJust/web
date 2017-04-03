@@ -16,7 +16,7 @@ var busboy = require('connect-busboy');
 var fileUpload = require('express-fileupload');
 var request = require('request');
 
-var fileupload = require('fileupload').createFileUpload('/wav_files').middleware;
+var fileupload2 = require('fileupload').createFileUpload('/wav_files2').middleware;
 
 var storage = require('@google-cloud/storage');
 
@@ -180,7 +180,7 @@ app.post('/create_room',function (req, res) {
 
 });
 
-app.post('/upload_file_from_plugin', fileupload, function (req, res) {
+app.post('/upload_file_from_plugin', fileupload2, function (req, res) {
 	console.log(req);
   console.log("*********************************************************************************************************");
   console.log(req.files);
