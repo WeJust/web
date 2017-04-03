@@ -222,7 +222,7 @@ app.post('/create_room',function (req, res) {
 
 app.post('/upload_file_from_plugin', function (req, res) {
 
-
+console.log(req);
 
   var upload = new Upload({
     dest: 'uploadDir'
