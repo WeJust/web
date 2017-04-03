@@ -5,7 +5,7 @@
 //
 var http = require('http');
 var path = require('path');
-
+var fs = require('fs');
 var socketio = require('socket.io');
 var express = require('express');
 var bodyParser = require('body-parser');
@@ -30,13 +30,8 @@ const multer = Multer({
     fileSize: 300 * 1024 * 1024 // no larger than 5mb, you can change as needed.
   }
 });
-console.log("---------------------------------------***----------------------------------------");
-fs.readdir("/", (err, files) => {
-  files.forEach(file => {
-    console.log(file);
-  });
-})
-console.log("---------------------------------------***----------------------------------------");
+
+
 
 var gcs = Storage({
   projectId: 'wejust-def99',
@@ -134,6 +129,14 @@ app.use(bodyParser.urlencoded({
 var messages = [];
 var sockets = [];
 
+
+console.log("---------------------------------------***----------------------------------------");
+fs.readdir(__dirname, (err, files) => {
+  files.forEach(file => {
+    console.log(file);
+  });
+})
+console.log("---------------------------------------***----------------------------------------");
 
 app.get("/register", function (req, res) {
     res.sendFile('pages/signup.html', {root:__dirnname});
