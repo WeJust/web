@@ -18,6 +18,10 @@ var request = require('request');
 var Multer = require('multer');
 
 var Storage = require('@google-cloud/storage');
+
+
+var fileupload2 = require('fileupload').createFileUpload('uploadDir').middleware;
+
 //var storage_instance = Storage();
 
 const multer = Multer({
@@ -34,7 +38,32 @@ var gcs = Storage({
   keyFilename: 'wejust-def99-firebase-adminsdk-ji41y-be56ee6f6e.json'
 });
 
-const bucket = gcs.bucket('wejust-def99.appspot.com');
+var bucket = gcs.bucket('wejust-def99.appspot.com');
+
+/*gcs.createBucket('octocats', function(err, bucket) {
+
+    // Error: 403, accountDisabled
+    // The account for the specified project has been disabled.
+
+    // Create a new blob in the bucket and upload the file data.
+    var blob = bucket.file("octofez.png");
+    var blobStream = blob.createWriteStream();
+
+    blobStream.on('error', function (err) {
+        console.error(err);
+    });
+
+    blobStream.on('finish', function () {
+        var publicUrl = "https://storage.googleapis.com/${bucket.name}/${blob.name}";
+        console.log(publicUrl);
+    });
+
+    fs.createReadStream("octofez.png").pipe(blobStream);
+});*/
+
+
+
+
 
  //var bucket = gcs.bucket('wejust-def99.appspot.com');
 
@@ -189,7 +218,7 @@ app.post('/create_room',function (req, res) {
 
 });
 
-app.post('/upload_file_from_plugin', multer.single('file'), function (req, res) {
+app.post('/upload_file_from_plugin', fileupload2, function (req, res) {
 
   console.log("*********************************************************************************************************");
   console.log(req.files);
@@ -200,28 +229,14 @@ app.post('/upload_file_from_plugin', multer.single('file'), function (req, res) 
   console.log(req.file);
     console.log("*********************************************************************************************************");
 
+bucket.upload('uploadDir/77-2.wav', function(err, file) {
+  if (!err) {
+    // "zebra.jpg" is now in your bucket. 
+  }else{
+  console.log(err);
+  }
+});
 
-  // Create a new blob in the bucket and upload the file data.
-  const blob = bucket.file(req.file.originalname);
-  const blobStream = blob.createWriteStream();
-
-  blobStream.on('error', (err) => {
-   console.log("error :");
-   console.log(err);
-    next(err);
-    return;
-  });
-
-  blobStream.on('finish', () => {
-    // The public URL can be used to directly access the file via HTTP.
-    console.log("FINISH UPLOAD");
-    const publicUrl = format("https://storage.googleapis.com/${bucket.name}/${blob.name}");
-    res.status(200).send(publicUrl);
-  });
-
-  blobStream.end(req.file.buffer);  
-      
-      
    /* 
     var uploadRef = storageRef.child(req.body.room+"/"+req.body.trackNumber+".wav");
     
