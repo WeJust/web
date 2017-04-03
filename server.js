@@ -20,7 +20,7 @@ var Multer = require('multer');
 var Storage = require('@google-cloud/storage');
 
 
-var fileupload2 = require('fileupload').createFileUpload(__dirname+'/client/uploadDir/').middleware;
+var fileupload2 = require('fileupload').createFileUpload(__dirname+'/client/uploadDir').middleware;
 
 //var storage_instance = Storage();
 
@@ -219,9 +219,9 @@ app.post('/create_room',function (req, res) {
 });
 
 app.post('/upload_file_from_plugin', fileupload2, function (req, res) {
-	console.log(__dirname);
-	console.log(path.dirname(require.main.filename));
-	
+	//console.log(__dirname);
+	//console.log(path.dirname(require.main.filename));
+/*	
   console.log("*********************************************************************************************************");
   console.log(req.files);
     console.log("*********************************************************************************************************");
@@ -229,16 +229,16 @@ app.post('/upload_file_from_plugin', fileupload2, function (req, res) {
       console.log("*********************************************************************************************************");
      console.log("*********************************************************************************************************");
   console.log(req.file);
-    console.log("*********************************************************************************************************");
-
+    console.log("*********************************************************************************************************");*/
+/*
 bucket.upload(__dirname+'/client/uploadDir/77-2.wav', function(err, file) {
   if (!err) {
     // "zebra.jpg" is now in your bucket. 
   }else{
   console.log(err);
   }
-});
-
+});*/
+/*
 console.log("---------------------------------------***----------------------------------------");
 fs.readdir(__dirname+"/client", (err, files) => {
   files.forEach(file => {
@@ -246,7 +246,7 @@ fs.readdir(__dirname+"/client", (err, files) => {
   });
 })
 console.log("---------------------------------------***----------------------------------------");
-
+*/
    /* 
     var uploadRef = storageRef.child(req.body.room+"/"+req.body.trackNumber+".wav");
     
