@@ -12,7 +12,6 @@ var bodyParser = require('body-parser');
 var session = require('express-session');
 var CryptoJS = require("crypto-js");
 var firebase = require("firebase");
-var fs = require('fs');
 var busboy = require('connect-busboy');
 var fileUpload = require('express-fileupload');
 var request = require('request');
