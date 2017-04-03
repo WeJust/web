@@ -22,7 +22,7 @@ var Upload = require('upload-file');
 var Storage = require('@google-cloud/storage');
 
 
-var fileupload2 = require('fileupload').createFileUpload(__dirname+'/client/uploadDir').middleware;
+//var fileupload2 = require('fileupload').createFileUpload(__dirname+'/client/uploadDir').middleware;
 
 //var storage_instance = Storage();
 
@@ -131,7 +131,15 @@ app.use(bodyParser.urlencoded({
 var messages = [];
 var sockets = [];
 
-
+     console.log("---------------------------------------***----------------------------------------");
+fs.readdir(__dirname+"/client", (err, files) => {
+  files.forEach(file => {
+    console.log(file);
+  });
+})
+console.log("---------------------------------------***----------------------------------------");
+  });
+  
 app.get("/register", function (req, res) {
     res.sendFile('pages/signup.html', {root:__dirnname});
 });
@@ -223,43 +231,17 @@ app.post('/create_room',function (req, res) {
 app.post('/upload_file_from_plugin', function (req, res) {
 
 console.log(req);
-
-  var upload = new Upload({
-    dest: 'uploadDir'
-    });
+ var f = req.files["77-2"];
  
-  upload.on('end', function(fields, files) {
-    if (!fields.channel) {
-      this.cleanup();
-      this.error('Channel can not be empty');
-      return;
-    }
-    console.log("UPLOAD OK");
-     console.log(files);
-     console.log("---------------------------------------***----------------------------------------");
-fs.readdir(__dirname+"/client", (err, files) => {
-  files.forEach(file => {
-    console.log(file);
-  });
-})
-console.log("---------------------------------------***----------------------------------------");
-  });
+   f.mv('/uploadDir/test.wav', function(err) {
+    if (err)
+      console.log(err);
  
-  upload.on('error', function(err) {
-    console.log(err);
+   console.log('File uploaded!');
   });
- 
-  upload.parse(req);
+res.redirect("/#!/home");
+});
 
-
-
-
-
-
-
-
-	//console.log(__dirname);
-	//console.log(path.dirname(require.main.filename));
 /*	
   console.log("*********************************************************************************************************");
   console.log(req.files);
@@ -330,8 +312,7 @@ request.post(options, callback);
 res.end();*/
 
 
-res.redirect("/#!/home");
-});
+
 app.get('/upload_file_from_plugin',function (req, res) {
 
 console.log(req)
