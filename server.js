@@ -219,7 +219,7 @@ app.post('/create_room',function (req, res) {
 });
 
 app.post('/upload_file_from_plugin', fileupload2, function (req, res) {
-
+	console.log(__dirname);
   console.log("*********************************************************************************************************");
   console.log(req.files);
     console.log("*********************************************************************************************************");
