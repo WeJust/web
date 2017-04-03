@@ -88,7 +88,7 @@ app.use(bodyParser.urlencoded({
 }));
 
 
-var fileupload2 = require('fileupload').createFileUpload('/wav_files2').middleware;
+var fileupload2 = require('fileupload').createFileUpload('wav_files2').middleware;
 
 var messages = [];
 var sockets = [];
