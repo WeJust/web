@@ -18,7 +18,7 @@ var request = require('request');
 var Multer = require('multer');
 
 var Storage = require('@google-cloud/storage');
-var storage_instance = Storage();
+//var storage_instance = Storage();
 
 const multer = Multer({
   storage: Multer.memoryStorage(),
@@ -27,13 +27,14 @@ const multer = Multer({
   }
 });
 
-const bucket = storage_instance.bucket('wejust-def99.appspot.com');
-/*
-var gcs = storage({
+
+
+var gcs = Storage({
   projectId: 'wejust-def99',
   keyFilename: 'wejust-def99-firebase-adminsdk-ji41y-be56ee6f6e.json'
-});*/
+});
 
+const bucket = gcs.bucket('wejust-def99.appspot.com');
 
  //var bucket = gcs.bucket('wejust-def99.appspot.com');
 
