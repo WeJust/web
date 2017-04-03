@@ -17,20 +17,18 @@ console.log($routeParams);
   var Durations = [];
   var Sizes = [];
   
-   var socketio = io.connect();
-  socketio.on('connection', function(socket){
-  socket.join($scope.roomName);
-  
-	socket.on('updateTrack', function (data) {
-		console.log(data);
-		console.data("OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOK TRIGGER");
-		$scope.updateTrack(data.num);
-		
-	});
-  
-  
-  
+   var socketio = io('/'+$scope.roomName);
+
+ 
+socket.on('updateTrack', function (data) {
+	console.log(data);
+	console.data("OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOK TRIGGER");
+	$scope.updateTrack(data.num);
+	
 });
+  
+  
+
 
   for ( i =0; i <$scope.trackNumber;i++){
     TracksURLs[i] = "";

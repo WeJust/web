@@ -238,7 +238,10 @@ sampleFile.mv('uploadDir/'+req.body.room+'-'+req.body.trackNumber+'.wav', functi
 	   console.log('File uploaded!');
 	   fs.unlink('uploadDir/'+req.body.room+'-'+req.body.trackNumber+'.wav', function(err){
 	   console.log("Tmp file delete !");
-		io.to(req.body.room).emit('updateTrack',{num : req.body.trackNumber});
+	   
+		var nsp = io.of('/'+req.body.room);
+		nsp.emit('updateTrack',{num : req.body.trackNumber});
+		//io.to(req.body.room).emit('updateTrack',{num : req.body.trackNumber});
 	   });
 	    // "zebra.jpg" is now in your bucket. 
 	  }else{
@@ -279,13 +282,14 @@ console.log(req)
 
 io.on('connection', function (socket) {
 
-    sockets.push(socket);
+	sockets.push(socket);
+	console.log('a user connected');
+	
+	
+	
 
-	
-	
-	
     socket.on('disconnect', function () {
-
+	console.log('a user disconnected');
     });
 
 
