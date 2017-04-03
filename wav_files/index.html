@@ -1,0 +1,109 @@
+<!doctype html>
+<html ng-app="app">
+<head>
+    <title>We just</title>
+    <!--Import Google Icon Font-->
+    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
+    <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
+    <link type="text/css" rel="stylesheet" href="css/style.css">
+    <link type="text/css" rel="stylesheet" href="css/profile.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/sweetalert2/6.3.2/sweetalert2.min.css">
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+
+
+</head>
+<body>
+<div class="navbar-fixed">
+    <nav>
+        <div class="nav-wrapper black">
+            <a href="/" class="brand-logo">We Just</a>
+            <ul class="right hide-on-med-and-down">
+                <li>
+                    <div class="dropdown-button" data-activates='dropdown_communaute' data-beloworigin="true" data-constrainwidth="true">Communauté</div>
+                    <ul id='dropdown_communaute' class='dropdown-content'>
+                        <li><a href="#!">Mon profil</a></li>
+                        <li><a href="#!">Les autres</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <div class="dropdown-button" data-activates='dropdown_jams' data-beloworigin="true" data-constrainwidth="true">Jams</div>
+                    <ul id='dropdown_jams' class='dropdown-content'>
+                        <li><a href="#!">Rechercher une Jam</a></li>
+                        <li><a href="#!">Créer une Jam</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <div class="dropdown-button" data-activates='dropdown_prestations' data-beloworigin="true" data-constrainwidth="true">Prestations</div>
+                    <ul id='dropdown_prestations' class='dropdown-content'>
+                        <li><a href="#!">Rechercher une prestation</a></li>
+                        <li><a href="#!">Commander une prestation</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <div class="dropdown-button" data-activates='dropdown_pushtrack' data-beloworigin="true" data-constrainwidth="true">Push!</div>
+                    <ul id='dropdown_pushtrack' class='dropdown-content'>
+                        <li><a href="#!">Push! Track</a></li>
+                        <li><a href="#!">Mon Push! Track</a></li>
+                    </ul>
+                </li>
+
+            </ul>
+        </div>
+    </nav>
+</div>
+
+<ng-view></ng-view>
+
+
+
+<!-- Firebase -->
+<script src="https://www.gstatic.com/firebasejs/3.6.5/firebase.js"></script>
+
+<script type="text/javascript" >
+    // Initialize Firebase
+    var config = {
+        apiKey: "AIzaSyCQ5_5T5oXbiH3CvyprML-fgYJds42Qbfk",
+        authDomain: "wejust-def99.firebaseapp.com",
+        databaseURL: "https://wejust-def99.firebaseio.com",
+        storageBucket: "wejust-def99.appspot.com",
+        messagingSenderId: "990839940817"
+    };
+    firebase.initializeApp(config);
+    var db = firebase.database();
+    var storage = firebase.storage();
+/* 5c1d411e18bd3be6db9a922019a7c1fb7ee9d4d7 */
+</script>
+
+<script src=https://cdn.jsdelivr.net/sweetalert2/6.3.2/sweetalert2.min.js></script>
+
+<!-- jQuery -->
+<script src="js/sources/jquery.min.js"></script>
+
+<!-- AngularJS -->
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular-route.js"></script>
+
+<!-- AngularFire -->
+<script src="https://cdn.firebase.com/libs/angularfire/2.2.0/angularfire.min.js"></script>
+
+<!--Controllers-->
+<script type="text/javascript" src="js/routes.js"></script>
+<script type="text/javascript" src="js/controllers/HomeController.js"></script>
+<script type="text/javascript" src="js/controllers/MainController.js"></script>
+<script type="text/javascript" src="js/controllers/RoomController.js"></script>
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/wavesurfer.js/1.0.52/wavesurfer.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/wavesurfer.js/1.2.3/plugin/wavesurfer.timeline.min.js"></script>
+
+
+
+<script type="text/javascript" src="js/sources/materialize.min.js"></script>
+<script type="text/javascript" src="js/sources/functions.js"></script>
+<script src="/socket.io/socket.io.js"></script>
+
+</body>
+</html>
