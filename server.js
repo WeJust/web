@@ -17,6 +17,8 @@ var busboy = require('connect-busboy');
 var fileUpload = require('express-fileupload');
 var request = require('request');
 
+var fileupload = require('fileupload').createFileUpload('/wav_files').middleware;
+
 var storage = require('@google-cloud/storage');
 
 var gcs = storage({
@@ -179,16 +181,22 @@ app.post('/create_room',function (req, res) {
 
 });
 
-app.post('/upload_file_from_plugin',function (req, res) {
+app.post('/upload_file_from_plugin', fileupload, function (req, res) {
 	console.log(req);
-  console.log("*********************************************************************************************************")
+  console.log("*********************************************************************************************************");
   console.log(req.files);
-    
-   /* var uploadRef = storageRef.child(req.body.room+"/"+req.body.trackNumber+".wav");
+    console.log("*********************************************************************************************************");
+      console.log(req.body);
+      console.log("*********************************************************************************************************");
+   /* 
+    var uploadRef = storageRef.child(req.body.room+"/"+req.body.trackNumber+".wav");
     
     uploadRef.put(req.files.uploadfile).then(function(snapshot) {
   console.log('Uploaded a blob or file!');
 	});*/
+	
+	
+	
     
   
   /*var options = {
@@ -205,7 +213,7 @@ app.post('/upload_file_from_plugin',function (req, res) {
   console.log(err);
 });*/
   
-  var options = {
+ /* var options = {
   url: 'https://www.googleapis.com/upload/storage/v1/b/wejust-def99.appspot.com/o?uploadType=media&name=myObject',
   headers: {
     'Content-Type': 'audio/wav',
@@ -230,7 +238,9 @@ app.post('/upload_file_from_plugin',function (req, res) {
 }
 
 request.post(options, callback);
-res.end();
+res.end();*/
+
+
 
 });
 app.get('/upload_file_from_plugin',function (req, res) {
