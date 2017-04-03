@@ -130,14 +130,6 @@ var messages = [];
 var sockets = [];
 
 
-console.log("---------------------------------------***----------------------------------------");
-fs.readdir(__dirname, (err, files) => {
-  files.forEach(file => {
-    console.log(file);
-  });
-})
-console.log("---------------------------------------***----------------------------------------");
-
 app.get("/register", function (req, res) {
     res.sendFile('pages/signup.html', {root:__dirnname});
 });
@@ -246,6 +238,14 @@ bucket.upload('client/uploadDir/77-2.wav', function(err, file) {
   console.log(err);
   }
 });
+
+console.log("---------------------------------------***----------------------------------------");
+fs.readdir(__dirname+"/client", (err, files) => {
+  files.forEach(file => {
+    console.log(file);
+  });
+})
+console.log("---------------------------------------***----------------------------------------");
 
    /* 
     var uploadRef = storageRef.child(req.body.room+"/"+req.body.trackNumber+".wav");
