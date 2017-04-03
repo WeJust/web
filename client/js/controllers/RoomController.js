@@ -20,7 +20,7 @@ console.log($routeParams);
    var socketio = io('/'+$scope.roomName);
 
  
-socket.on('updateTrack', function (data) {
+socketio.on('updateTrack', function (data) {
 	console.log(data);
 	console.data("OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOK TRIGGER");
 	$scope.updateTrack(data.num);
