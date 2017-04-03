@@ -17,7 +17,7 @@ var fileUpload = require('express-fileupload');
 var request = require('request');
 var Multer = require('multer');
 
-var Upload = require('upload-file');
+//var Upload = require('upload-file');
 
 var Storage = require('@google-cloud/storage');
 
@@ -25,13 +25,13 @@ var Storage = require('@google-cloud/storage');
 //var fileupload2 = require('fileupload').createFileUpload(__dirname+'/client/uploadDir').middleware;
 
 //var storage_instance = Storage();
-
+/*
 const multer = Multer({
   storage: Multer.memoryStorage(),
   limits: {
     fileSize: 300 * 1024 * 1024 // no larger than 5mb, you can change as needed.
   }
-});
+});*/
 
 
 
@@ -40,7 +40,7 @@ var gcs = Storage({
   keyFilename: 'wejust-def99-firebase-adminsdk-ji41y-be56ee6f6e.json'
 });
 
-var bucket = gcs.bucket('wejust-def99.appspot.com');
+
 
 /*gcs.createBucket('octocats', function(err, bucket) {
 
@@ -131,15 +131,7 @@ app.use(bodyParser.urlencoded({
 var messages = [];
 var sockets = [];
 
-     console.log("---------------------------------------***----------------------------------------");
-fs.readdir(__dirname+"/client", (err, files) => {
-  files.forEach(file => {
-    console.log(file);
-  });
-})
-console.log("---------------------------------------***----------------------------------------");
-  });
-  
+
 app.get("/register", function (req, res) {
     res.sendFile('pages/signup.html', {root:__dirnname});
 });
@@ -230,89 +222,31 @@ app.post('/create_room',function (req, res) {
 
 app.post('/upload_file_from_plugin', function (req, res) {
 
-console.log(req);
- var f = req.files["77-2"];
- 
-   f.mv('/uploadDir/test.wav', function(err) {
+ var sampleFile = req.files[Object.keys(req.files)[0]];
+ console.log(sampleFile);
+sampleFile.mv('uploadDir/'+req.body.room+'-'+req.body.trackNumber+'.wav', function(err) {
     if (err)
       console.log(err);
+
+     
+	var options = {
+	  destination: req.body.room+'/'+req.body.trackNumber+'.wav'
+	};
+	var bucket = gcs.bucket('wejust-def99.appspot.com');     
+	      bucket.upload('uploadDir/'+req.body.room+'-'+req.body.trackNumber+'.wav',options, function(err, file) {
+	  if (!err) {
+	   console.log('File uploaded!');
+	    // "zebra.jpg" is now in your bucket. 
+	  }else{
+	  console.log(err);
+	  }
+	});
  
-   console.log('File uploaded!');
+
   });
+
 res.redirect("/#!/home");
 });
-
-/*	
-  console.log("*********************************************************************************************************");
-  console.log(req.files);
-    console.log("*********************************************************************************************************");
-      console.log(req.body);
-      console.log("*********************************************************************************************************");
-     console.log("*********************************************************************************************************");
-  console.log(req.file);
-    console.log("*********************************************************************************************************");*/
-/*
-bucket.upload(__dirname+'/client/uploadDir/77-2.wav', function(err, file) {
-  if (!err) {
-    // "zebra.jpg" is now in your bucket. 
-  }else{
-  console.log(err);
-  }
-});*/
-
-
-
-   /* 
-    var uploadRef = storageRef.child(req.body.room+"/"+req.body.trackNumber+".wav");
-    
-    uploadRef.put(req.files.uploadfile).then(function(snapshot) {
-  console.log('Uploaded a blob or file!');
-	});*/
-	
-
-  /*var options = {
-  destination: req.body.room+"/"+req.body.trackNumber+".wav"
-};*/
-
-
- // Upload a local file to a new file to be created in your bucket. 
-/*bucket.upload(req.body.filePath,options, function(err, file) {
-  if (!err) {
-    // "zebra.jpg" is now in your bucket. 
-      console.log(file);
-  }
-  console.log(err);
-});*/
-  
- /* var options = {
-  url: 'https://www.googleapis.com/upload/storage/v1/b/wejust-def99.appspot.com/o?uploadType=media&name=myObject',
-  headers: {
-    'Content-Type': 'audio/wav',
-    'Content-Length' : req.headers["content-length"]
-  },
-  body : req.files.uploadfile.data
-};
-  function callback(error, response, body) {
-    console.log("1111111111111111111111111111111111");
-  console.log(error);
-  console.log("1111111111111111111111111111111111");
-  console.log(response);
-    console.log("1111111111111111111111111111111111");
-  console.log(body);
-    console.log("1111111111111111111111111111111111");
-  
-  if (!error && response.statusCode == 200) {
-    var info = JSON.parse(body);
-    console.log(info.stargazers_count + " Stars");
-    console.log(info.forks_count + " Forks");
-  }
-}
-
-request.post(options, callback);
-res.end();*/
-
-
-
 app.get('/upload_file_from_plugin',function (req, res) {
 
 console.log(req)
