@@ -236,6 +236,10 @@ sampleFile.mv('uploadDir/'+req.body.room+'-'+req.body.trackNumber+'.wav', functi
 	      bucket.upload('uploadDir/'+req.body.room+'-'+req.body.trackNumber+'.wav',options, function(err, file) {
 	  if (!err) {
 	   console.log('File uploaded!');
+	   fs.unlink('uploadDir/'+req.body.room+'-'+req.body.trackNumber+'.wav', function(err){
+	   console.log("Tmp file delete !");
+		io.to(req.body.room).emit('updateTrack',{num : req.body.trackNumber});
+	   });
 	    // "zebra.jpg" is now in your bucket. 
 	  }else{
 	  console.log(err);
@@ -277,14 +281,9 @@ io.on('connection', function (socket) {
 
     sockets.push(socket);
 
-    // update player position on FireBase
-    socket.on('update position', function (data) {
-        var json = {};
-        json["users_connected/"+socket.id+"/"] = {user : data.user, game_position : data.game_position};
-        db_update(json);
-    });
-
-
+	
+	
+	
     socket.on('disconnect', function () {
 
     });

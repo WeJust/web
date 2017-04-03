@@ -59,7 +59,7 @@ app.controller('HomeController', function ($scope) {
                     showConfirmButton: false,
                     timer: "1000",
                     onClose: function () {
-                        window.location.href="/room"
+                        window.location.href="/room?j="+room.name
                     }
                 });
             } else {

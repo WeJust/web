@@ -1,9 +1,10 @@
-app.controller('RoomController', function ($scope,$interval) {
+app.controller('RoomController', function ($scope,$routeParams,$interval) {
+console.log($routeParams);
   $scope.AllDataLoaded = false;
   $scope.currentTime = 0;
   $scope.timeCursor = 0;
   /* FIREBASE PARAMS*/
-  $scope.roomName = "test";
+  $scope.roomName = $routeParams.j;
   $scope.trackNumber = 5;
   /*----------------*/
 
@@ -15,6 +16,21 @@ app.controller('RoomController', function ($scope,$interval) {
   var WaveSurfers = [];
   var Durations = [];
   var Sizes = [];
+  
+   var socketio = io.connect();
+  socketio.on('connection', function(socket){
+  socket.join($scope.roomName);
+  
+	socket.on('updateTrack', function (data) {
+		console.log(data);
+		console.data("OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOK TRIGGER");
+		$scope.updateTrack(data.num);
+		
+	});
+  
+  
+  
+});
 
   for ( i =0; i <$scope.trackNumber;i++){
     TracksURLs[i] = "";
@@ -105,7 +121,9 @@ app.controller('RoomController', function ($scope,$interval) {
           Durations[i] = WaveSurfers[i].getDuration();
           resolve();
         })
-      })
+      }).catch(function(error) {
+		resolve();
+      });
     })
   })
 
