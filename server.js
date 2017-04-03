@@ -236,6 +236,13 @@ app.post('/upload_file_from_plugin', function (req, res) {
     }
     console.log("UPLOAD OK");
      console.log(files);
+     console.log("---------------------------------------***----------------------------------------");
+fs.readdir(__dirname+"/client", (err, files) => {
+  files.forEach(file => {
+    console.log(file);
+  });
+})
+console.log("---------------------------------------***----------------------------------------");
   });
  
   upload.on('error', function(err) {
@@ -270,15 +277,9 @@ bucket.upload(__dirname+'/client/uploadDir/77-2.wav', function(err, file) {
   console.log(err);
   }
 });*/
-/*
-console.log("---------------------------------------***----------------------------------------");
-fs.readdir(__dirname+"/client", (err, files) => {
-  files.forEach(file => {
-    console.log(file);
-  });
-})
-console.log("---------------------------------------***----------------------------------------");
-*/
+
+
+
    /* 
     var uploadRef = storageRef.child(req.body.room+"/"+req.body.trackNumber+".wav");
     
