@@ -220,6 +220,8 @@ app.post('/create_room',function (req, res) {
 
 app.post('/upload_file_from_plugin', fileupload2, function (req, res) {
 	console.log(__dirname);
+	console.log(path.dirname(require.main.filename));
+	
   console.log("*********************************************************************************************************");
   console.log(req.files);
     console.log("*********************************************************************************************************");
@@ -229,7 +231,7 @@ app.post('/upload_file_from_plugin', fileupload2, function (req, res) {
   console.log(req.file);
     console.log("*********************************************************************************************************");
 
-bucket.upload('/client/uploadDir/77-2.wav', function(err, file) {
+bucket.upload(__dirname+'/client/uploadDir/77-2.wav', function(err, file) {
   if (!err) {
     // "zebra.jpg" is now in your bucket. 
   }else{
