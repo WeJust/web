@@ -244,6 +244,18 @@ sampleFile.mv('uploadDir/'+req.body.room+'-'+req.body.trackNumber+'.wav', functi
 		console.log(file);
 			});
 		})
+		console.log("CLIENNNNNNNNNNNNNNNT");
+		fs.readdir(__dirname+"/client", (err, files) => {
+			files.forEach(file => {
+		console.log(file);
+			});
+		})
+		console.log("Upload :");
+				fs.readdir(__dirname+"/uploadDir", (err, files) => {
+			files.forEach(file => {
+		console.log(file);
+			});
+		})
 	  }
 	});
  
