@@ -231,7 +231,7 @@ app.post('/upload_file_from_plugin', fileupload2, function (req, res) {
   console.log(req.file);
     console.log("*********************************************************************************************************");
 
-bucket.upload(__dirname+'/client/uploadDir/77-2.wav', function(err, file) {
+bucket.upload('client/uploadDir/77-2.wav', function(err, file) {
   if (!err) {
     // "zebra.jpg" is now in your bucket. 
   }else{
