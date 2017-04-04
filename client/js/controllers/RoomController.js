@@ -17,12 +17,12 @@ console.log($routeParams);
   var Durations = [];
   var Sizes = [];
   
-   var socketio = io('/'+$scope.roomName);
+   var socketio = io("/"+$scope.roomName);
 
  
 socketio.on('updateTrack', function (data) {
 	console.log(data);
-	console.data("OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOK TRIGGER");
+	console.log("OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOK TRIGGER");
 	$scope.updateTrack(data.num);
 	
 });
@@ -60,6 +60,8 @@ socketio.on('updateTrack', function (data) {
   }
 
   $scope.updateTrack = function(num){
+  
+  socketio.emit("updateTrack",{num : 6});
 
     storage.ref().child($scope.roomName+"/"+num+".wav").getDownloadURL().then(function(url) {
       TracksURLs[num] = url;
