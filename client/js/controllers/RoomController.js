@@ -8,7 +8,6 @@ console.log($routeParams);
   $scope.trackNumber = 5;
   /*----------------*/
 
-  var TracksURLs = [];
   var Colors = ['orange','blue','red','yellow','green','pink','black','grey'];
   var Promises0 = [];
   var Promises = [];
