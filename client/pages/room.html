@@ -13,12 +13,11 @@ console.log(storage);
     storage.ref(roomname+"/"+num+".wav").getDownloadURL().then(function(url) {
     
 	console.log(url);
-    // This can be downloaded directly:
+// This can be downloaded directly:
   var xhr = new XMLHttpRequest();
   xhr.responseType = 'blob';
   xhr.onload = function(event) {
     var blob = xhr.response;
-	console.log(blob);
   };
   xhr.open('GET', url);
   xhr.send();
