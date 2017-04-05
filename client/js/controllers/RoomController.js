@@ -149,7 +149,7 @@ socketio.on('updateTrack', function (data) {
 	
         $("#row-after-wave").before('<div id="waveform'+i+'">');
         $("#waveform"+i).css("width",Sizes[i]+"%");
-	var waveform_dl_div = $("<button type='button' class='btn'>Track n° : "+i+"</button>");
+	var waveform_dl_div = $("<a>Track n° : "+i+"</a>");
 	waveform_dl_div.attr("id","waveform_dl"+i);
 	waveform_dl_div.attr("href",TracksURLs[i]);
 	waveform_dl_div.attr("download","");
