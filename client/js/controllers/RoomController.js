@@ -90,7 +90,7 @@ socketio.on('updateTrack', function (data) {
 
         }
         var div_size = size*100/$scope.maxSize;
-        $("#waveform"+num).replaceWith('<div id="waveform'+num+'" style="width : '+div_size+'%">');
+        $("#waveform"+num).replaceWith('<div id="waveform'+num+'" style="width : '+div_size+'%" >');
         WaveSurfers[num].destroy();
         WaveSurfers[num]= WaveSurfer.create({
           container: '#waveform'+num,
@@ -111,7 +111,7 @@ socketio.on('updateTrack', function (data) {
     Promises0[i] = new Promise(  function(resolve, reject) {
       storage.ref().child($scope.roomName+"/"+i+".wav").getDownloadURL().then(function(url) {
         TracksURLs[i] = url;
-        $("#row-before-wave").append('<div id="waveform'+i+'" style="display:none">');
+        $("#row-before-wave").append('<div id="waveform'+i+'" style="display:none" >');
         WaveSurfers[i] = WaveSurfer.create({
           container: '#waveform'+i
         });
@@ -149,13 +149,12 @@ socketio.on('updateTrack', function (data) {
 	
         $("#row-after-wave").before('<div id="waveform'+i+'">');
         $("#waveform"+i).css("width",Sizes[i]+"%");
-	var waveform_dl_div = $("<a>Track n°"+i+" :</a>");
+	var waveform_dl_div = $("<a>Track n°"+(i+1)+" :</a>");
 	waveform_dl_div.attr("id","waveform_dl"+i);
 	waveform_dl_div.attr("href",TracksURLs[i]);
 	waveform_dl_div.attr("download","");
 	$("#waveform"+i).append(waveform_dl_div);
-	console.log($("waveform_dl"+i));
-	console.log($("#waveform"+i));
+
         WaveSurfers[i]= WaveSurfer.create({
           container: '#waveform'+i,
           waveColor: Colors[i],
