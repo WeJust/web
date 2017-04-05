@@ -10,23 +10,17 @@
 function f(roomname,num) {
 console.log(roomname+" "+num);
 console.log(TracksURLs);
-    storage.ref(roomname+"/"+num+".wav").getDownloadURL().then(function(url) {
-    
-	console.log(url);
-// This can be downloaded directly:
+console.log(TracksURLs[num]);
+
+
   var xhr = new XMLHttpRequest();
   xhr.responseType = 'blob';
   xhr.onload = function(event) {
     var blob = xhr.response;
   };
-  xhr.open('GET', url);
+  xhr.open('GET', TracksURLs[num]);
   xhr.send();
   
-     
-    }).catch(function(error) {
-  console.log(error);
-});
-    
 }
 </script>
 
