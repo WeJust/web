@@ -151,7 +151,8 @@ socketio.on('updateTrack', function (data) {
         $("#waveform"+i).css("width",Sizes[i]+"%");
 	var waveform_dl_div = $("<button type='button' class='btn'>Track n° : "+i+"</button>");
 	waveform_dl_div.attr("id","waveform_dl"+i);
-	waveform_dl_div.attr("onclick","f("+$scope.roomName+","+i+")");
+	waveform_dl_div.attr("href",TracksURLs[i]);
+	waveform_dl_div.attr("download","");
 	$("#waveform"+i).append(waveform_dl_div);
 	console.log($("waveform_dl"+i));
 	console.log($("#waveform"+i));
