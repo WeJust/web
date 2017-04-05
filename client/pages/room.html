@@ -10,7 +10,7 @@
 function f(roomname,num) {
 console.log(roomname+" "+num);
 console.log(storage);
-    storage.ref().child(roomname+"/"+num+".wav").getDownloadURL().then(function(url) {
+    storage.ref().child("test/0.wav").getDownloadURL().then(function(url) {
     
 	console.log(url);
     // This can be downloaded directly:
