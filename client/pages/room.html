@@ -6,8 +6,34 @@
 </style>
 
 
+<script>
+function f(roomname,num) {
+console.log(roomname+" "+num);
+console.log(storage);
+    storage.ref().child(roomname+"/"+num+".wav").getDownloadURL().then(function(url) {
+    
+	console.log(url);
+    // This can be downloaded directly:
+  var xhr = new XMLHttpRequest();
+  xhr.responseType = 'blob';
+  xhr.onload = function(event) {
+    var blob = xhr.response;
+	console.log(blob);
+  };
+  xhr.open('GET', url);
+  xhr.send();
+  
+     
+    }).catch(function(error) {
+  console.log(error);
+});;
+    
+}
+</script>
+
 
 <div class="container" style="overflow:hidden;padding:15px">
+<div id="wave_div">
     <div id="row-before-wave" class="row">
         <div class="col s12 center">
             <div class="preloader-wrapper big active">
@@ -24,9 +50,7 @@
         </div>
     </div>
     <div id="row-after-wave"></div>
-    <button class="btn btn-primary" ng-click="updateTrack(3)">
-      Update
-    </button>
+</div>
 
     <div class="row">
   <input ng-show ="AllDataLoaded" type="range" min="1" max="{{maxSize*10000}}" ng-model="timeCursor" ng-change="placeCursor(timeCursor/10000);isPlaying = false" />

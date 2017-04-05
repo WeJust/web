@@ -140,14 +140,22 @@ socketio.on('updateTrack', function (data) {
         });
       });
     });
+    
 
     Promise.all(Promises0.concat(Promises.concat(Promises2))).then(function(){
       $scope.AllDataLoaded = true;
       console.log("All data loaded");
       $("#row-before-wave").find("div").remove();
       TracksURLs.forEach(function(url,i) {
+	
         $("#row-after-wave").before('<div id="waveform'+i+'">');
         $("#waveform"+i).css("width",Sizes[i]+"%");
+	var waveform_dl_div = $("<button type='button' class='btn'>Track n° : "+i+"</button>");
+	waveform_dl_div.attr("id","waveform_dl"+i);
+	waveform_dl_div.attr("onclick","f("+$scope.roomName+","+i+")");
+	$("#waveform"+i).append(waveform_dl_div);
+	console.log($("waveform_dl"+i));
+	console.log($("#waveform"+i));
         WaveSurfers[i]= WaveSurfer.create({
           container: '#waveform'+i,
           waveColor: Colors[i],
