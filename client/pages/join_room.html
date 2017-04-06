@@ -84,7 +84,7 @@
         class="btn-flat join_button_private secondary-content" ng-click="passwordAlert(room)">
         <i class="material-icons">https</i>
       </button>
-      <a ng-href="{{'#!/room?j='+room.name}}" ng-show="room.access=='Public'" class=" btn-flat secondary-content">
+      <a ng-href="{{'#!/room?j='+room.name+'&t='+room.numberOfPlayers}}" ng-show="room.access=='Public'" class=" btn-flat secondary-content">
         <i class="material-icons">send</i>
       </a>
 

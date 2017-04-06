@@ -5,7 +5,7 @@ console.log($routeParams);
   $scope.timeCursor = 0;
   /* FIREBASE PARAMS*/
   $scope.roomName = $routeParams.j;
-  $scope.trackNumber = 5;
+  $scope.trackNumber = parseInt($routeParams.t);
   /*----------------*/
   
     $http.get("/getFirebaseUser").then(function (user) {
