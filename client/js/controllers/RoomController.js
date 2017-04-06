@@ -7,6 +7,11 @@ console.log($routeParams);
   $scope.roomName = $routeParams.j;
   $scope.trackNumber = 5;
   /*----------------*/
+  
+    $http.get("/getFirebaseUser").then(function (user) {
+        $scope.firebaseUser = user.data;
+        console.log(user.data);
+    });
 
   var Colors = ['orange','blue','red','yellow','green','pink','black','grey'];
   var Promises0 = [];
@@ -34,12 +39,13 @@ socketio.on('new_message', function (data) {
 	$scope.chat.push(data);
 	console.log(data);
 	console.log($scope.chat);
+	$scope.message_value = "";
 });
 
 
   $scope.message = function(data){
 	console.log("click");
-    socket_serveur.emit("new_message",{room : $scope.roomName, user : "bla",message : data});
+    socket_serveur.emit("new_message",{room : $scope.roomName, user : $scope.firebaseUser.displayName ,message : data});
 
   };
 
