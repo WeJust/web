@@ -289,7 +289,11 @@ io.on('connection', function (socket) {
 	console.log(data);
 	});
 	
+	socket.on("new_message",function(data){
+		io.of('/'+data.room).emit('new_message',{user : data.user,message : data.message});
 	
+	console.log(data);
+	});	
 
     socket.on('disconnect', function () {
 	console.log('a user disconnected');

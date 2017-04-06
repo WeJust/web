@@ -24,7 +24,7 @@ console.log(TracksURLs[num]);
 </script>
 
  <div class="row">
-<div style="overflow:hidden;padding:15px;width:50%;background-color:#FFE4B5">
+<div style="overflow:hidden;padding:15px;">
 <div id="wave_div">
     <div id="row-before-wave" class="row">
         <div class="col s12 center">
@@ -59,8 +59,38 @@ console.log(TracksURLs[num]);
     </button>
 
 </div>
-    </div>
-   <div class="row">
-      <div class="col s12"><span class="flow-text">This div is 12-columns wide on all screen sizes</span></div>
-      <div class="col s6 offset-s6"><span class="flow-text">6-columns (offset-by-6)</span></div>
-    </div>
+    </div> 
+      <ul id="slide-out" class="side-nav">
+
+    <li> <span>Chat </span></li>
+        <li><div class="divider"></div></li>
+	
+	<li ng-repeat="message in chat track by $index"> <div> {{message.user}} : {{message.message}} </div> </li>
+        <div class="input-field col s6">
+		<input placeholder="write here" ng-model="message_value" type="text" class="validate">
+		<label for="first_name">Message</label>
+        </div>
+	<button type="button" ng-click="message(message_value)">Click Me!</button>
+	
+    <li><div class="divider"></div></li>
+    <li><a class="subheader">Subheader</a></li>
+    <li><a class="waves-effect" href="#!">Third Link With Waves</a></li>
+  </ul>
+  <a href="#" data-activates="slide-out" class="button-collapse"><i class="material-icons">menu</i></a>
+  
+  
+  <script>
+  
+  // Initialize collapse button
+  $(".button-collapse").sideNav();
+  // Initialize collapsible (uncomment the line below if you use the dropdown variation)
+  //$('.collapsible').collapsible();
+  
+    $('.button-collapse').sideNav({
+      menuWidth: 500, // Default is 300
+      edge: 'right', // Choose the horizontal origin
+      closeOnClick: true, // Closes side-nav on <a> clicks, useful for Angular/Meteor
+      draggable: true // Choose whether you can drag to open on touch screens
+    }
+  );
+  </script>

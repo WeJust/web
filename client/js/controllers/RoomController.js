@@ -16,17 +16,32 @@ console.log($routeParams);
   var Durations = [];
   var Sizes = [];
   
+  $scope.message_value = "";
+  
+  $scope.chat = [];
+  
    var socketio = io("/"+$scope.roomName);
+   var socket_serveur = io();
 
  
 socketio.on('updateTrack', function (data) {
 	console.log(data);
 	console.log("OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOK TRIGGER");
 	$scope.updateTrack(data.num);
-	
 });
-  
-  
+
+socketio.on('new_message', function (data) {
+	$scope.chat.push(data);
+	console.log(data);
+	console.log($scope.chat);
+});
+
+
+  $scope.message = function(data){
+	console.log("click");
+    socket_serveur.emit("new_message",{room : $scope.roomName, user : "bla",message : data});
+
+  };
 
 
   for ( i =0; i <$scope.trackNumber;i++){
