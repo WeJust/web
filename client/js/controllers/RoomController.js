@@ -89,6 +89,11 @@ socketio.on('new_message', function (data) {
       WaveSurfers[num] = WaveSurfer.create({
         container: '#waveform'+num
       });
+      	var waveform_dl_div = $("<a>Track n°"+(num+1)+" :</a>");
+	waveform_dl_div.attr("id","waveform_dl"+num);
+	waveform_dl_div.attr("href",TracksURLs[num]);
+	waveform_dl_div.attr("download","");
+	$("#waveform"+num).append(waveform_dl_div);
       
       WaveSurfers[num].load(url);
       WaveSurfers[num].on('ready', function () {
