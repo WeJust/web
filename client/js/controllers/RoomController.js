@@ -85,10 +85,11 @@ socketio.on('new_message', function (data) {
 
     storage.ref().child($scope.roomName+"/"+num+".wav").getDownloadURL().then(function(url) {
       TracksURLs[num] = url;
-      $("#wavform"+num).replaceWith('<div id="waveform'+num+'" style="display:none">');
+      $("#waveform"+num).replaceWith('<div id="waveform'+num+'" style="display:none">');
       WaveSurfers[num] = WaveSurfer.create({
         container: '#waveform'+num
       });
+      
       WaveSurfers[num].load(url);
       WaveSurfers[num].on('ready', function () {
         Durations[num] = WaveSurfers[num].getDuration();
