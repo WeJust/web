@@ -13,7 +13,7 @@ console.log($routeParams);
         console.log(user.data);
     });
 
-  var Colors = ['orange','blue','red','yellow','green','pink','black','grey'];
+  var Colors = ['orange','blue','red','purple','green','pink','black','grey'];
   var Promises0 = [];
   var Promises = [];
   var Promises2 = [];

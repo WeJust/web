@@ -22,8 +22,10 @@ console.log(TracksURLs[num]);
   
 }
 </script>
-
+<br>
+    <a href="#" data-activates="slide-out" class="button-collapse" style="padding:15px;"><i class="material-icons">chat_bubble</i></a>
  <div class="row">
+   
 <div style="overflow:hidden;padding:15px;">
 <div id="wave_div">
     <div id="row-before-wave" class="row">
@@ -48,15 +50,30 @@ console.log(TracksURLs[num]);
     <div class="row">
   <input ng-show ="AllDataLoaded" type="range" min="1" max="{{maxSize*10000}}" ng-model="timeCursor" ng-change="placeCursor(timeCursor/10000);isPlaying = false" />
   </div>
+   <div class="row">
     <button ng-show="!isPlaying && AllDataLoaded" class="btn btn-primary" ng-click="playAllTracks(timeCursor/10000); isPlaying = !isPlaying">
-      Play {{timeCursor/10000 | number:2}}s
+      <i class="material-icons">replay</i> 
     </button>
     <button ng-show="isPlaying && AllDataLoaded" class="btn btn-primary" ng-click="pauseAllTracks();isPlaying = !isPlaying">
-      Pause {{currentTime | number:2}}s
+      <i class="material-icons">pause</i>  
     </button>
     <button ng-show="!isPlaying && AllDataLoaded" class="btn btn-primary" ng-click="playAllTracks(currentTime);isPlaying = !isPlaying">
-      Resume
+      <i class="material-icons">play_arrow</i> 
     </button>
+
+   <div class="chip">
+      {{currentTime | number:2}}s
+    </div>
+     
+    </div>
+
+
+  <div class="row">
+  <div ng-show="!isPlaying && AllDataLoaded" class="chip">
+      {{timeCursor/10000 | number:2}}s
+  </div>
+   </div>
+
 
 </div>
     </div> 
@@ -66,16 +83,17 @@ console.log(TracksURLs[num]);
         <li><div class="divider"></div></li>
 	
 	<li ng-repeat="message in chat track by $index"> <div> {{message.user}} : {{message.message}} </div> </li>
+	<form ng-submit="message(message_value)">
         <div class="input-field col s6">
 		<input placeholder="write here" ng-model="message_value" type="text" class="validate">
 		<label for="first_name">Message</label>
         </div>
-	<button type="submit" ng-click="message(message_value)">Click Me!</button>
 	
-    <li><div class="divider"></div></li>
+	<input type="submit" id="submit" value="Submit" hidden/>
+	</form>
   
-  </ul>
-  <a href="#" data-activates="slide-out" class="button-collapse"><i class="material-icons">menu</i></a>
+	</ul>
+
   
   
   <script>
@@ -87,7 +105,7 @@ console.log(TracksURLs[num]);
   
     $('.button-collapse').sideNav({
       menuWidth: 500, // Default is 300
-      edge: 'right', // Choose the horizontal origin
+      edge: 'left', // Choose the horizontal origin
       closeOnClick: true, // Closes side-nav on <a> clicks, useful for Angular/Meteor
       draggable: true // Choose whether you can drag to open on touch screens
     }
