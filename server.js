@@ -224,22 +224,22 @@ app.post('/upload_file_from_plugin', function (req, res) {
 
  var sampleFile = req.files[Object.keys(req.files)[0]];
  console.log(sampleFile);
-sampleFile.mv('uploadDir/'+req.body.room+'-'+req.body.trackNumber+'.wav', function(err) {
+sampleFile.mv('uploadDir/'+req.body.room+'-'+(req.body.trackNumber-1)+'.wav', function(err) {
     if (err)
       console.log(err);
 
      
 	var options = {
-	  destination: req.body.room+'/'+req.body.trackNumber+'.wav'
+	  destination: req.body.room+'/'+(req.body.trackNumber-1)+'.wav'
 	};
 	var bucket = gcs.bucket('wejust-def99.appspot.com');     
-	      bucket.upload('uploadDir/'+req.body.room+'-'+req.body.trackNumber+'.wav',options, function(err, file) {
+	      bucket.upload('uploadDir/'+req.body.room+'-'+(req.body.trackNumber-1)+'.wav',options, function(err, file) {
 	  if (!err) {
 	   console.log('File uploaded!');
-	   fs.unlink('uploadDir/'+req.body.room+'-'+req.body.trackNumber+'.wav', function(err){
+	   fs.unlink('uploadDir/'+req.body.room+'-'+(req.body.trackNumber-1)+'.wav', function(err){
 	   console.log("Tmp file delete !");
 	   
-		io.of('/'+req.body.room).emit('updateTrack',{num : req.body.trackNumber});
+		io.of('/'+req.body.room).emit('updateTrack',{num : (req.body.trackNumber-1)});
 		//io.to(req.body.room).emit('updateTrack',{num : req.body.trackNumber});
 	   });
 	    // "zebra.jpg" is now in your bucket. 
