@@ -123,7 +123,7 @@ socketio.on('new_message', function (data) {
         });
         WaveSurfers[num].load(url);
       })
-    })
+    });
   }
 
 
