@@ -1,4 +1,4 @@
-app.controller('RoomController', function ($scope,$routeParams,$interval) {
+app.controller('RoomController', function ($scope,$routeParams,$interval,$http) {
 console.log($routeParams);
   $scope.AllDataLoaded = false;
   $scope.currentTime = 0;
