@@ -282,8 +282,8 @@ io.on('connection', function (socket) {
 
 	sockets.push(socket);
 	console.log('a user connected');
-	var nsp = io.of('/333');
-	nsp.emit('updateTrack',{num : 2});
+	//var nsp = io.of('/333');
+	//nsp.emit('updateTrack',{num : 2});
 	
 	socket.on("updateTrack",function(data){
 	console.log(data);

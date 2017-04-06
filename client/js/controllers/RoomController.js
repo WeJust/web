@@ -81,7 +81,7 @@ socketio.on('new_message', function (data) {
 
   $scope.updateTrack = function(num){
   
-  socketio.emit("updateTrack",{num : 6});
+  //socketio.emit("updateTrack",{num : 6});
 
     storage.ref().child($scope.roomName+"/"+num+".wav").getDownloadURL().then(function(url) {
       TracksURLs[num] = url;
