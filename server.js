@@ -216,7 +216,7 @@ app.post('/create_room',function (req, res) {
     var json = JSON.parse(JSON.stringify(req.body));
 
     db.ref("rooms/"+req.body.name).set(json);
-    res.redirect("/#!/home");
+    res.redirect("/#!/room?j="+req.body.name+"&t="+req.body.numberOfPlayers);
 
 });
 
